@@ -11,6 +11,7 @@ const submitBlog = require('./routes/submitblog');
 const getBlogs = require('./routes/getblogs');
 const getBlog = require('./routes/getblog');
 const deleteBlog = require('./routes/deleteblog');
+const updateBlog = require('./routes/updateblog');
 
 
 const app = express();
@@ -45,6 +46,7 @@ app.use('/api/submitblog', submitBlog);
 app.use('/api/getblogs', getBlogs);
 app.use('/api/getblog', getBlog);
 app.use('/api/deleteblog', deleteBlog);
+app.use('/api/updateblog', updateBlog);
 
 
 // catch 404 and forward to error handler

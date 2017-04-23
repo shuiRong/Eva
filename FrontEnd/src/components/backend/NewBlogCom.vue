@@ -43,6 +43,7 @@
                 dialogVisible: false,
                 submitUrl: 'http://127.0.0.1:3000/api/submitblog',
                 getUrl: 'http://127.0.0.1:3000/api/getblog',
+                updateUrl: 'http://127.0.0.1:3000/api/updateblog',
                 submitBtnVisible: true,
                 updateBtnVisible: false,
             };
@@ -74,15 +75,29 @@
                     blogContent: this.blogContent,
                 }).then((res) => {
                     if (res.status === 200) {
-                        this.open();
+                        this.open('博客提交成功！');
                     }
-                }).catch((res) => {
-                    console.log('Failed: submit blog infomation failed.NewBlogCom.vue.', res);
+                }).catch((err) => {
+                    console.error('Failed: submit blog infomation failed.NewBlogCom.vue.', err);
                 });
             },
-            open() {
+            updateBlog() {
+                this.$http.post(this.updateUrl, {
+                    id: this.$route.params.id,
+                    title: this.title,
+                    tags: this.blogTags,
+                    content: this.blogContent,
+                }).then((res) => {
+                    if (res.status === 200) {
+                        this.open('博客更新成功！');
+                    }
+                }).catch((err) => {
+                    console.error('Failed: update blog infomation failed.NewBlogCom.vue.', err);
+                });
+            },
+            open(info) {
                 this.$message({
-                    message: '博客提交成功！',
+                    message: info,
                     type: 'success',
                 });
                 this.$router.push({
