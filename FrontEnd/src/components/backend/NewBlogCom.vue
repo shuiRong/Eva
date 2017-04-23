@@ -167,6 +167,7 @@
     
     .writeBlog .previewDialog .el-dialog__body {
         padding-left: 1.5rem;
+        min-height: 10rem;
     }
     
     .writeBlog .previewDialog pre code {

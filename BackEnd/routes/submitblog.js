@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 require('../database/connect');
-const NewBlog = require('../database/newblog');
+const NewBlog = require('../database/blog');
 const Tags = require('../database/tags');
 const moment = require('moment');
 

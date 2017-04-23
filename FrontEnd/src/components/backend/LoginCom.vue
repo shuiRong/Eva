@@ -4,29 +4,29 @@
             <div class='mainContent'>
                 <div class='nav'>
                     <template v-for='(tag,index) in tags'>
-                        <el-tag　:type='computedColor(index)'>{{tag}}</el-tag>
-                    </template>
+                                                                                                                                    <el-tag　:type='computedColor(index)'>{{tag}}</el-tag>
+</template>
                 </div>
                 <router-link :to='{name: "NewBlogRoute"}'>
                     <el-button type='primary' icon='plus'>写博客</el-button>
                 </router-link>
                 <div class='blogInfo'>
-                    <template v-for='blog in blogs'>
-                        <el-card class='blogCard'>
-                            <div class='blogLeft'>
-                                <router-link :to='{name: "BackEndBlogRoute",params:{id:blog.id}}'>{{blog.title}}</router-link>
-                                <div class='blogDown'>
-                                    <div>
-                                        <template v-for='tag in blog.tags'>
-                                            <el-tag>{{tag}}</el-tag>
-                                        </template>
+<template v-for='blog in blogs'>
+    <el-card class='blogCard'>
+        <div class='blogLeft'>
+            <router-link :to='{name: "BackEndBlogRoute",params:{id:blog._id}}'>{{blog.title}}</router-link>
+            <div class='blogDown'>
+                <div>
+                    <template v-for='tag in blog.tags'>
+                                                                                                                                                        <el-tag>{{tag}}</el-tag>
+</template>
                                     </div>
                                     <span class='blogTime'>{{blog.created_at}}</span>
                                 </div>
                             </div>
                             <div class='blogRight'>
                                 <i class='el-icon-edit'></i>
-                                <i class='el-icon-delete'></i>
+                                <i class='el-icon-delete' @click='deleteBlog(blog._id)' ></i>
                             </div>
                         </el-card>
                     </template>
@@ -41,36 +41,65 @@
         name: 'LoginComName',
         data() {
             return {
-                tags: ['前端', '后端', '生活', '读书', '随便说点什么吧', '当然我在扯淡', '前端', '后端', '生活', '读书', '随便说点什么吧', '当然我在扯淡'],
-                blogs: [{
-                    title: '今天说点啥呢？',
-                    created_at: '2017-02-22',
-                    tags: ['前端', '读书'],
-                    id: '8as6d564c3zxc5v1456sd4f53s',
-                }, {
-                    title: '今天说点啥呢？测试的道理',
-                    created_at: '2017-02-22',
-                    tags: ['前端', '后端', '读书'],
-                    id: '8as6d564c3zxc5v1456sd4f53s',
-                }, {
-                    title: '今天说点啥呢？测试的道理测试的说点啥呢？测试的道理测试的道理',
-                    created_at: '2017-02-22',
-                    tags: ['前端', '后端', '生活', '读书'],
-                    id: '8as6d564c3zxc5v1456sd4f53s',
-                }, {
-                    title: '今天说点啥呢？测试的道理',
-                    created_at: '2017-02-22',
-                    tags: ['前端', '后端', '生活', '读书'],
-                    id: '8as6d564c3zxc5v1456sd4f53s',
-                }],
+                tags: [],
+                blogs: [],
                 colors: ['', 'gray', 'danger', 'warning', 'primary', 'success'],
                 count: 0,
+                getUrl: 'http://127.0.0.1:3000/api/getblogs',
+                deleteUrl: 'http://127.0.0.1:3000/api/deleteblog',
             };
         },
         methods: {
             computedColor(index) {
                 return this.colors[index % this.colors.length];
             },
+            deleteBlog(blogId) {
+                this.$confirm('此操作将永久删除该博客, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning',
+                }).then(() => {
+                    this.$message({
+                        type: 'success',
+                        message: '删除成功!',
+                    });
+                    this.$http.post(this.deleteUrl, {
+                        id: blogId,
+                    }).then(() => {
+                        // 服务器端删除博客成功之后，主动删除this.blogs里的相关数据，这样正好也会触发vue视图更新．
+                        const blogs = [];
+                        this.blogs.forEach((ele) => {
+                            if (ele._id !== blogId) {
+                                blogs.push(ele);
+                            }
+                        });
+                        this.blogs = blogs;
+                    }).catch((err) => {
+                        console.error('Failed: Delete The Blog Failed ', err);
+                    });
+                }).catch(() => {
+                    this.$message({
+                        type: 'info',
+                        message: '已取消删除',
+                    });
+                });
+            },
+        },
+        mounted() {
+            this.$http({
+                url: this.getUrl,
+                methods: 'get',
+            }).then((res) => {
+                this.blogs = res.data;
+                res.data.forEach((ele) => {
+                    ele.tags.forEach((tag) => {
+                        this.tags.push(tag);
+                    });
+                });
+                this.tags = [...new Set(this.tags)];
+            }).catch((err) => {
+                console.error('Error: LoginCom.vue,get blog informations failed! ', err);
+            });
         },
     };
 </script>
@@ -94,6 +123,7 @@
     
     .mainContent {
         min-height: 40rem;
+        min-width: 100%;
     }
     
     .nav {
@@ -101,6 +131,9 @@
         margin: 1rem 0 3rem 0;
         font-size: 25px;
         padding: 0.5rem;
+        min-width: 100%;
+        min-height: 5rem;
+        box-sizing: border-box;
     }
     
     .nav .el-tag {
@@ -112,25 +145,29 @@
         font-size: 1.25rem;
     }
     
-    .mainContent button{
+    .mainContent button {
         margin: 1rem;
     }
-
+    
     .blogInfo {
         min-height: 5rem;
         display: flex;
         flex-direction: column;
     }
     
-    .blogInfo .blogCard{
+    .blogInfo .blogCard {
         margin-bottom: 0.5rem;
     }
-    .blogInfo .blogCard > div {
+    
+    .blogInfo .blogCard>div {
         display: flex;
         justify-content: space-between;
         align-items: center;
         background: #E5E9F2;
         padding: 0.7rem;
+        box-sizing: border-box;
+        min-width: 100%;
+        min-height: 4rem;
     }
     
     .blogInfo .blogLeft {

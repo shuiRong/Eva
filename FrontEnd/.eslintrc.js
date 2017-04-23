@@ -24,6 +24,10 @@ module.exports = {
     },
     // add your custom rules here
     'rules': {
+        //允许特定前置下划线：_id
+        'no-underscore-dangle': ['error', {
+            'allow': ['_id']
+        }],
         'eol-last': ['error', 'never'],
         'indent': ['error', 4], //缩进为４个空格
         'no-console': 'off', //可以使用console
