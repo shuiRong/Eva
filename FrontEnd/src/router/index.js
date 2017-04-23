@@ -21,7 +21,7 @@ export default new Router({
         name: 'BackEndBlogRoute',
         component: BackEndBlogCom,
     }, {
-        path: '/new',
+        path: '/new/:id',
         name: 'NewBlogRoute',
         component: NewBlogCom,
     }],

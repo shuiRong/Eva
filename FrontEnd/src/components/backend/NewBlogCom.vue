@@ -16,7 +16,8 @@
                 </el-input>
                 <div class='blogBtns'>
                     <el-button type='text' @click='dialogVisible=true'>预览</el-button>
-                    <el-button type='primary' @click='submitBlog'>发布</el-button>
+                    <el-button type='primary' @click='submitBlog' v-if='submitBtnVisible'>发布</el-button>
+                    <el-button type='success' @click='updateBlog' v-if='updateBtnVisible'>更新</el-button>
                 </div>
                 <el-dialog :title='title' v-model='dialogVisible' size='small' top='5%' class='previewDialog'>
                     <div>
@@ -41,6 +42,9 @@
                 blogContent: '',
                 dialogVisible: false,
                 submitUrl: 'http://127.0.0.1:3000/api/submitblog',
+                getUrl: 'http://127.0.0.1:3000/api/getblog',
+                submitBtnVisible: true,
+                updateBtnVisible: false,
             };
         },
         methods: {
@@ -90,6 +94,26 @@
                     name: 'LoginRoute',
                 });
             },
+        },
+        created() {
+            // 0表示写博客，其它情况表示编辑博客
+            const id = this.$route.params.id;
+            if (id !== '0') {
+                // 让发布按钮消失，换成更新按钮
+                this.submitBtnVisible = false;
+                this.updateBtnVisible = true;
+                // 从服务器拉取博客数据，推送到视图中
+                this.$http.post(this.getUrl, {
+                    id,
+                }).then((res) => {
+                    const data = res.body;
+                    this.title = data.title;
+                    this.blogContent = data.content;
+                    this.blogTags = data.tags;
+                }).catch((err) => {
+                    console.error('Error: Get the blog error:', err);
+                });
+            }
         },
         components: {
             VueMarkdown,

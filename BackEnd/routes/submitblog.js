@@ -6,7 +6,7 @@ const Tags = require('../database/tags');
 const moment = require('moment');
 
 router.route('/')
-    .post((req, res, next) => {
+    .post((req, res) => {
         let data = req.body;
         let newBlog = new NewBlog({
             title: data.blogTitle,

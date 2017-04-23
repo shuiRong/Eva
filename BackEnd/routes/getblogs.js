@@ -4,7 +4,7 @@ require('../database/connect');
 const Blog = require('../database/blog');
 
 router.route('/')
-    .get((req, res, err) => {
+    .get((req, res) => {
         let getBlog = new Promise((resolve, reject) => {
             Blog.find({}, (err, doc) => {
                 err ? reject(err) : resolve(doc);

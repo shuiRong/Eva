@@ -4,10 +4,10 @@
             <div class='mainContent'>
                 <div class='nav'>
                     <template v-for='(tag,index) in tags'>
-                                                                                                                                    <el-tag　:type='computedColor(index)'>{{tag}}</el-tag>
+                                                                                                                                            <el-tag　:type='computedColor(index)'>{{tag}}</el-tag>
 </template>
                 </div>
-                <router-link :to='{name: "NewBlogRoute"}'>
+                <router-link :to='{name: "NewBlogRoute",params:{id:"0"}}'>
                     <el-button type='primary' icon='plus'>写博客</el-button>
                 </router-link>
                 <div class='blogInfo'>
@@ -18,14 +18,14 @@
             <div class='blogDown'>
                 <div>
                     <template v-for='tag in blog.tags'>
-                                                                                                                                                        <el-tag>{{tag}}</el-tag>
+                                                                                                                                                                <el-tag>{{tag}}</el-tag>
 </template>
                                     </div>
                                     <span class='blogTime'>{{blog.created_at}}</span>
                                 </div>
                             </div>
                             <div class='blogRight'>
-                                <i class='el-icon-edit'></i>
+                                <i class='el-icon-edit' @click='editBlog(blog._id)'></i>
                                 <i class='el-icon-delete' @click='deleteBlog(blog._id)' ></i>
                             </div>
                         </el-card>
@@ -84,6 +84,14 @@
                     });
                 });
             },
+            editBlog(blogId) {
+                this.$router.push({
+                    name: 'NewBlogRoute',
+                    params: {
+                        id: blogId,
+                    },
+                });
+            },
         },
         mounted() {
             this.$http({
@@ -109,7 +117,7 @@
     .container {
         display: flex;
         justify-content: center;
-        margin-top: 3rem;
+        margin-top: 2.5%;
         margin-bottom: 2rem;
         color: black;
         font-size: 1.5rem;

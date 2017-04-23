@@ -5,12 +5,10 @@ const Blog = require('../database/blog');
 
 router.route('/')
     .post((req, res) => {
-        let id = req.body.id;
-        console.log('_id: ', id);
-        Blog.deleteOne({
-            '_id': id
+        Blog.findOne({
+            '_id': req.body.id
         }, (err, doc) => {
-            err ? console.error('Error: delete the blog Failed. DeleteBlog.js', err) : res.end();
+            err ? res.end() : res.json(doc);
         });
     });
 
