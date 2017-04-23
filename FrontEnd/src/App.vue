@@ -17,7 +17,7 @@
                 url: 'http://127.0.0.1:3000/',
                 methods: 'get',
             }).then((res) => {
-                this.msg = res;
+                this.msg = res.body;
             });
         },
     };

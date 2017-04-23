@@ -80,7 +80,7 @@
     .container {
         display: flex;
         justify-content: center;
-        margin-top: 1rem;
+        margin-top: 3rem;
         margin-bottom: 2rem;
         color: black;
         font-size: 1.5rem;
@@ -106,7 +106,7 @@
     .nav .el-tag {
         min-width: 5rem;
         text-align: center;
-        margin: 0.2rem 0.4rem;
+        margin: 0.4rem 0.4rem;
         height: 2.5rem;
         line-height: 2.5rem;
         font-size: 1.25rem;
