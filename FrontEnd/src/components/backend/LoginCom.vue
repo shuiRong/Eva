@@ -3,12 +3,13 @@
         <el-card class='bord-card'>
             <div class='mainContent'>
                 <div class='nav'>
+                    <el-button type='primary' v-on:click='select("all")'>全部</el-button>
                     <template v-for='(tag,index) in tags'>
-                                                                                                                                            <el-tag　:type='computedColor(index)'>{{tag}}</el-tag>
+                                                                                                                                                                                                                                <el-button　:type='computedColor(index)' @click='select(tag)'>{{tag}}</el-button>
 </template>
                 </div>
                 <router-link :to='{name: "NewBlogRoute",params:{id:"0"}}'>
-                    <el-button type='primary' icon='plus'>写博客</el-button>
+                    <el-button type='primary' icon='plus' class='writeBtn'>写博客</el-button>
                 </router-link>
                 <div class='blogInfo'>
 <template v-for='blog in blogs'>
@@ -18,7 +19,7 @@
             <div class='blogDown'>
                 <div>
                     <template v-for='tag in blog.tags'>
-                                                                                                                                                                <el-tag>{{tag}}</el-tag>
+                                                                                                                                                                                                                                                    <el-tag>{{tag}}</el-tag>
 </template>
                                     </div>
                                     <span class='blogTime'>{{blog.created_at}}</span>
@@ -43,7 +44,8 @@
             return {
                 tags: [],
                 blogs: [],
-                colors: ['', 'gray', 'danger', 'warning', 'primary', 'success'],
+                constBlogs: [],
+                colors: ['danger', 'warning', 'success', 'info', '', 'primary'],
                 count: 0,
                 getUrl: 'http://127.0.0.1:3000/api/getblogs',
                 deleteUrl: 'http://127.0.0.1:3000/api/deleteblog',
@@ -74,6 +76,7 @@
                             }
                         });
                         this.blogs = blogs;
+                        this.dealTags(blogs);
                     }).catch((err) => {
                         console.error('Failed: Delete The Blog Failed ', err);
                     });
@@ -92,6 +95,28 @@
                     },
                 });
             },
+            dealTags(data) {
+                const tags = [];
+                data.forEach((ele) => {
+                    ele.tags.forEach((tag) => {
+                        tags.push(tag);
+                    });
+                });
+                this.tags = [...new Set(tags)];
+            },
+            select(arr) {
+                if (arr === 'all') {
+                    this.blogs = this.constBlogs;
+                } else {
+                    const blogs = [];
+                    this.constBlogs.forEach((ele) => {
+                        if (ele.tags.indexOf(arr) >= 0) {
+                            blogs.push(ele);
+                        }
+                    });
+                    this.blogs = blogs;
+                }
+            },
         },
         mounted() {
             this.$http({
@@ -99,12 +124,8 @@
                 methods: 'get',
             }).then((res) => {
                 this.blogs = res.data;
-                res.data.forEach((ele) => {
-                    ele.tags.forEach((tag) => {
-                        this.tags.push(tag);
-                    });
-                });
-                this.tags = [...new Set(this.tags)];
+                this.constBlogs = res.data;
+                this.dealTags(res.data);
             }).catch((err) => {
                 console.error('Error: LoginCom.vue,get blog informations failed! ', err);
             });
@@ -144,16 +165,11 @@
         box-sizing: border-box;
     }
     
-    .nav .el-tag {
-        min-width: 5rem;
-        text-align: center;
-        margin: 0.4rem 0.4rem;
-        height: 2.5rem;
-        line-height: 2.5rem;
-        font-size: 1.25rem;
+    .nav .el-button {
+        margin: 0.4rem 0.5rem;
     }
     
-    .mainContent button {
+    .mainContent .writeBtn {
         margin: 1rem;
     }
     
