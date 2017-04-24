@@ -8,11 +8,12 @@ const moment = require('moment');
 router.route('/')
     .post((req, res) => {
         let data = req.body;
+        const time = new moment().format().match(/.{10}/)[0];
         let newBlog = new NewBlog({
             title: data.blogTitle,
             tags: data.blogTags,
             content: data.blogContent,
-            created_at: new moment().format(),
+            created_at: time,
         });
         let saveBlog = new Promise((resolve, reject) => {
             newBlog.save((err, doc) => {

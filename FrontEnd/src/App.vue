@@ -8,17 +8,7 @@
     export default {
         name: 'app',
         data() {
-            return {
-                msg: '',
-            };
-        },
-        created() {
-            this.$http({
-                url: 'http://127.0.0.1:3000/',
-                methods: 'get',
-            }).then((res) => {
-                this.msg = res.body;
-            });
+            return {};
         },
     };
 </script>

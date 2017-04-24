@@ -167,10 +167,15 @@
     
     .blogTags .el-tag {
         margin: 0 0.3rem;
-        min-width: 5rem;
+        min-width: 4rem;
         text-align: center;
     }
     
+    .blogTags .el-tag i{
+        color: white;
+        margin-left: 0.3rem;
+    }
+
     .blogTags input {
         width: 5rem;
     }
@@ -207,8 +212,12 @@
     .writeBlog .previewDialog .el-dialog__body {
         padding-left: 1.5rem;
         min-height: 10rem;
+        font-size: 20px;
+        line-height: 1.6;
     }
-    
+    .writeBlog .previewDialog .el-dialog__header{
+        text-align:center;
+    }
     .writeBlog .previewDialog pre code {
         background: #8492A6;
     }

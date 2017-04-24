@@ -15,7 +15,7 @@
 <template v-for='blog in blogs'>
     <el-card class='blogCard'>
         <div class='blogLeft'>
-            <router-link :to='{name: "BackEndBlogRoute",params:{id:blog._id}}'>{{blog.title}}</router-link>
+            <router-link :to='{name: "BlogRoute",params:{id:blog._id}}'>{{blog.title}}</router-link>
             <div class='blogDown'>
                 <div>
                     <template v-for='tag in blog.tags'>
@@ -76,6 +76,7 @@
                             }
                         });
                         this.blogs = blogs;
+                        this.constBlogs = blogs;
                         this.dealTags(blogs);
                     }).catch((err) => {
                         console.error('Failed: Delete The Blog Failed ', err);
@@ -123,8 +124,8 @@
                 url: this.getUrl,
                 methods: 'get',
             }).then((res) => {
-                this.blogs = res.data;
-                this.constBlogs = res.data;
+                this.blogs = res.data.reverse();
+                this.constBlogs = this.blogs;
                 this.dealTags(res.data);
             }).catch((err) => {
                 console.error('Error: LoginCom.vue,get blog informations failed! ', err);
