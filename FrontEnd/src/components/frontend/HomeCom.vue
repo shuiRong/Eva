@@ -10,15 +10,15 @@
         </div>
         <div id='blogSec' :style='distanceOfTop'>
             <template v-for='blog in blogs'>
-                                                <el-card class='homeBlogCard'>
-                                                    <router-link :to='{name: "BlogRoute", params:{id: blog._id}}'>
-                                                        {{blog.title}}
-                                                    </router-link>
-                                                    <div>
-                                                        <template v-for='tag in blog.tags'>
-                                                            <el-tag type='gray'>
-                                                                {{tag}}
-                                                            </el-tag>
+                                                                                                                <el-card class='homeBlogCard'>
+                                                                                                                    <router-link :to='{name: "BlogRoute", params:{id: blog._id}}'>
+                                                                                                                        {{blog.title}}
+                                                                                                                    </router-link>
+                                                                                                                    <div>
+                                                                                                                        <template v-for='tag in blog.tags'>
+                                                                                                                            <el-tag type='gray'>
+                                                                                                                                {{tag}}
+                                                                                                                            </el-tag>
 </template>
                     </div>
                 </el-card>
@@ -34,6 +34,7 @@
                 clientHeight: {
                     height: '600px',
                 },
+                height: document.documentElement.clientHeight,
                 blogs: [],
                 distanceOfTop: {
                     'margin-top': '5rem',
@@ -55,8 +56,20 @@
                     this.distanceOfTop['margin-top'] = '2rem';
                 }
             });
-            // 动态设置bgimage高度为屏幕高度
+        },
+        mounted() {
+            // 动态设置背景图的高度为浏览器可视区域高度.
+            // 首先在Virtual DOM渲染数据时，设置下背景图的高度．
+            // 然后监听window的resize事件．在浏览器窗口变化时再设置下背景图高度．
+            // Dynamically set the backgorund image's height
+            // to make it's same with the borwser window's height.
+            // Listen the resize event of window to dynamically set
+            // the background image's height.
             this.clientHeight.height = `${document.documentElement.clientHeight}px`;
+            const that = this;
+            window.onresize = function temp() {
+                that.clientHeight.height = `${document.documentElement.clientHeight}px`;
+            };
         },
     };
 </script>
@@ -89,7 +102,7 @@
         color: #8492A6;
     }
     
-    .homePage .el-dialog a{
+    .homePage .el-dialog a {
         text-decoration: none;
         color: #1F2D3D;
     }

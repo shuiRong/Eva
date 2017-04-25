@@ -5,9 +5,9 @@
         <el-card class='bpCardTitle'>{{blog.title}}</el-card>
         <div class='bpTags'>
             <template v-for='tag in blog.tags'>
-                                                <el-tag type='gray'>
-                                                    {{tag}}
-                                                </el-tag>
+                                                        <el-tag type='gray'>
+                                                            {{tag}}
+                                                        </el-tag>
 </template>
         </div>
         <p class='bpTime'>{{blog.created_at}}</p>
@@ -31,17 +31,6 @@
                 getUrl: 'http://127.0.0.1:3000/api/getblog',
             };
         },
-        created() {
-            this.$http.post(this.getUrl, {
-                id: this.$route.params.id,
-            }).then((res) => {
-                this.blog = res.data;
-            }).catch((err) => {
-                console.error('Error: Get the blog infomation failed! ', err);
-            });
-            // 动态设置bgimage高度为屏幕高度
-            this.clientHeight.height = `${document.documentElement.clientHeight}px`;
-        },
         methods: {
             // 点击背景图就回到主页，贴心吧，嘻嘻．
             backToHome() {
@@ -52,6 +41,25 @@
         },
         components: {
             VueMarkdown,
+        },
+        created() {
+            this.$http.post(this.getUrl, {
+                id: this.$route.params.id,
+            }).then((res) => {
+                this.blog = res.data;
+            }).catch((err) => {
+                console.error('Error: Get the blog infomation failed! ', err);
+            });
+        },
+        mounted() {
+            // 动态设置背景图的高度为浏览器可视区域高度
+            // 首先在Virtual DOM渲染数据时，设置下背景图的高度．
+            this.clientHeight.height = `${document.documentElement.clientHeight}px`;
+            // 然后监听window的resize事件．在浏览器窗口变化时再设置下背景图高度．
+            const that = this;
+            window.onresize = function temp() {
+                that.clientHeight.height = `${document.documentElement.clientHeight}px`;
+            };
         },
     };
 </script>
