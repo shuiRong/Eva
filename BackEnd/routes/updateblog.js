@@ -3,6 +3,8 @@ const router = express.Router();
 require('../database/connect');
 const Blog = require('../database/blog');
 
+// 更新数据库里的博客数据．
+// update blog data from database
 router.route('/')
     .post((req, res) => {
         const data = req.body;

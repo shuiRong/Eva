@@ -5,7 +5,7 @@
                 <div class='nav'>
                     <el-button type='primary' v-on:click='select("all")'>全部</el-button>
                     <template v-for='(tag,index) in tags'>
-                                                                                                                                                                                                                                <el-button　:type='computedColor(index)' @click='select(tag)'>{{tag}}</el-button>
+                                                                            <el-button　:type='computedColor(index)' @click='select(tag)'>{{tag}}</el-button>
 </template>
                 </div>
                 <router-link :to='{name: "NewBlogRoute",params:{id:"0"}}'>
@@ -19,7 +19,7 @@
             <div class='blogDown'>
                 <div>
                     <template v-for='tag in blog.tags'>
-                                                                                                                                                                                                                                                    <el-tag>{{tag}}</el-tag>
+                                                                                                <el-tag>{{tag}}</el-tag>
 </template>
                                     </div>
                                     <span class='blogTime'>{{blog.created_at}}</span>
@@ -46,15 +46,28 @@
                 blogs: [],
                 constBlogs: [],
                 colors: ['danger', 'warning', 'success', 'info', '', 'primary'],
-                count: 0,
+                // 记录标签是否被选中，１表示标签被选择了（即点了＂全部＂之外的其他标签），0表示标签没有被选中（即标签没有点，或者点了全部）
+                // recored the status of whether whether tags are selected.
+                // 1 means that tags are selected.
+                // (In the other way, users clicked on of the tag except the "All Tag").
+                // 0 means that tags are not selected
+                // (In the other way, users haven't clicked on of the tag
+                // except the "All Tag" or clicked the "All tag").
+                selectStatus: 0,
                 getUrl: 'http://127.0.0.1:3000/api/getblogs',
                 deleteUrl: 'http://127.0.0.1:3000/api/deleteblog',
             };
         },
         methods: {
+            // 按照顺序返回颜色值．
+            // reutrn color in the order.
             computedColor(index) {
                 return this.colors[index % this.colors.length];
             },
+            // 向服务器发送删除博客的请求，同时从data里删除该博客信息，
+            // 然后重新计算标签信息
+            // post a request for delete the blog, meantime, delete this blog data from data．
+            // And then recompute the tags data.
             deleteBlog(blogId) {
                 this.$confirm('此操作将永久删除该博客, 是否继续?', '提示', {
                     confirmButtonText: '确定',
@@ -68,16 +81,32 @@
                     this.$http.post(this.deleteUrl, {
                         id: blogId,
                     }).then(() => {
-                        // 服务器端删除博客成功之后，主动删除this.blogs里的相关数据，这样正好也会触发vue视图更新．
-                        const blogs = [];
+                        // 顺便一提，服务器端删除博客成功之后，主动删除this.blogs里的相关数据．这样正好会触发vue视图更新．双向绑定特性用着挺爽的．
+                        // 注： 在标签选中状态下删除博客，和未选中状态下删除博客需要两种方式去处理上方标签和this.blogs/this.constBlogs的更新．
+                        // btw, the view will update while delete infomation from this.blogs.
+                        // Vue.js is convenient.
+                        // Attention: We need two way to update tags
+                        // and `this.blogs` and `this.constBlogs`,
+                        // depend on deleting blog whether tag are selected and tag are not selected.
+                        const blogss = [];
                         this.blogs.forEach((ele) => {
                             if (ele._id !== blogId) {
-                                blogs.push(ele);
+                                blogss.push(ele);
                             }
                         });
-                        this.blogs = blogs;
-                        this.constBlogs = blogs;
-                        this.dealTags(blogs);
+                        this.blogs = blogss;
+                        if (this.selectStatus === 0) {
+                            this.constBlogs = blogss;
+                        } else {
+                            const blogs = [];
+                            this.constBlogs.forEach((ele) => {
+                                if (ele._id !== blogId) {
+                                    blogs.push(ele);
+                                }
+                                this.constBlogs = blogs;
+                            });
+                        }
+                        this.reComputeTags();
                     }).catch((err) => {
                         console.error('Failed: Delete The Blog Failed ', err);
                     });
@@ -96,9 +125,9 @@
                     },
                 });
             },
-            dealTags(data) {
+            reComputeTags() {
                 const tags = [];
-                data.forEach((ele) => {
+                this.constBlogs.forEach((ele) => {
                     ele.tags.forEach((tag) => {
                         tags.push(tag);
                     });
@@ -106,9 +135,13 @@
                 this.tags = [...new Set(tags)];
             },
             select(arr) {
+                // 干啥被选标签更新`this.blogs`数据
+                // update `this.blogs` according to which tag is selected.
                 if (arr === 'all') {
                     this.blogs = this.constBlogs;
+                    this.selectStatus = 0;
                 } else {
+                    this.selectStatus = 1;
                     const blogs = [];
                     this.constBlogs.forEach((ele) => {
                         if (ele.tags.indexOf(arr) >= 0) {
@@ -120,13 +153,14 @@
             },
         },
         mounted() {
+            // get the blogs data from remote server.
             this.$http({
                 url: this.getUrl,
                 methods: 'get',
             }).then((res) => {
                 this.blogs = res.data.reverse();
                 this.constBlogs = this.blogs;
-                this.dealTags(res.data);
+                this.reComputeTags();
             }).catch((err) => {
                 console.error('Error: LoginCom.vue,get blog informations failed! ', err);
             });

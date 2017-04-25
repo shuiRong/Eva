@@ -13,6 +13,7 @@ Vue.use(VueSource);
 Vue.use(ElementUI);
 
 // 通过Vue的自定义指令来使用highlight.js;
+// uses highlight.js by using custom directives(Vue's)
 Vue.directive('highlight', (el) => {
     const blocks = el.querySelectorAll('pre code');
     blocks.forEach((block) => {

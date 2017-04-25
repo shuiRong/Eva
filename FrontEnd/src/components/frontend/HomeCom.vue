@@ -44,12 +44,15 @@
             };
         },
         created() {
+            // 在Vue实例created时期从服务器获取博客数据．
+            // Get the blog data from remote server in the created period.
             this.$http({
                 url: this.getUrl,
                 methods: 'get',
             }).then((res) => {
                 this.blogs = res.body.reverse();
-                // 动态设置博客块的margin-top;
+                // 动态设置博客块的margin-top.
+                // Set the blog section's margin-top dynamically.
                 if (this.blogs.length <= 3) {
                     this.distanceOfTop['margin-top'] = '5rem';
                 } else {

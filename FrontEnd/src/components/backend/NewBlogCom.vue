@@ -69,6 +69,8 @@
                 this.inputValue = '';
             },
             submitBlog() {
+                // 提交新博客数据．
+                // post new blog data.
                 this.$http.post(this.submitUrl, {
                     blogTitle: this.title,
                     blogTags: this.blogTags,
@@ -82,6 +84,8 @@
                 });
             },
             updateBlog() {
+                // 提交更新的博客数据．
+                // post updated blog data.
                 this.$http.post(this.updateUrl, {
                     id: this.$route.params.id,
                     title: this.title,
@@ -105,6 +109,7 @@
                 });
             },
             backOne() {
+                // back to login page.
                 this.$router.push({
                     name: 'LoginRoute',
                 });
@@ -112,6 +117,8 @@
         },
         created() {
             // 0表示写博客，其它情况表示编辑博客
+            // 0 means that this component is used for writing new blog.
+            // otherwise, this component is used for editing old blog.
             const id = this.$route.params.id;
             if (id !== '0') {
                 // 让发布按钮消失，换成更新按钮

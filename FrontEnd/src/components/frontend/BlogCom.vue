@@ -5,10 +5,10 @@
         <el-card class='bpCardTitle'>{{blog.title}}</el-card>
         <div class='bpTags'>
             <template v-for='tag in blog.tags'>
-                                                        <el-tag type='gray'>
-                                                            {{tag}}
-                                                        </el-tag>
-</template>
+                    <el-tag type='gray'>
+                        {{tag}}
+                    </el-tag>
+            </template>
         </div>
         <p class='bpTime'>{{blog.created_at}}</p>
         <el-card class='bpCardContent'>
@@ -19,6 +19,8 @@
 </template>
 
 <script>
+    // 使用这个组件把md文本渲染成html
+    // Render the markdown text to html using this component
     import VueMarkdown from 'vue-markdown';
     
     export default {
@@ -33,6 +35,7 @@
         },
         methods: {
             // 点击背景图就回到主页，贴心吧，嘻嘻．
+            // Back to home page When you click the background image. sweet details.
             backToHome() {
                 this.$router.push({
                     name: 'HomeRoute',
@@ -43,6 +46,8 @@
             VueMarkdown,
         },
         created() {
+            // 在Vue实例created时期从服务器获取博客数据．
+            // Get the blog data from remote server in the created period.
             this.$http.post(this.getUrl, {
                 id: this.$route.params.id,
             }).then((res) => {
@@ -52,10 +57,14 @@
             });
         },
         mounted() {
-            // 动态设置背景图的高度为浏览器可视区域高度
+            // 动态设置背景图的高度为浏览器可视区域高度.
             // 首先在Virtual DOM渲染数据时，设置下背景图的高度．
-            this.clientHeight.height = `${document.documentElement.clientHeight}px`;
             // 然后监听window的resize事件．在浏览器窗口变化时再设置下背景图高度．
+            // Dynamically set the backgorund image's height
+            // to make it's same with the borwser window's height.
+            // Listen the resize event of window to dynamically set
+            // the background image's height.
+            this.clientHeight.height = `${document.documentElement.clientHeight}px`;
             const that = this;
             window.onresize = function temp() {
                 that.clientHeight.height = `${document.documentElement.clientHeight}px`;

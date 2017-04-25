@@ -2,7 +2,7 @@
 
 Hope`Eva` can be the first selection of writing blog who has special aesthetics. And the project is free for all the users.
 
-#### 快速开始
+#### QuickStart
 
 ---
 

@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
 const index = require('./routes/index');
-const users = require('./routes/users');
 const submitBlog = require('./routes/submitblog');
 const getBlogs = require('./routes/getblogs');
 const getBlog = require('./routes/getblog');
@@ -20,7 +19,8 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-//服务器端全局设置返回头部信息，以支持get,post跨域。
+// 服务器端全局设置返回头部信息，以支持get,post跨域。
+// server side set the headers information of reponse to support cross orign resource sharing(CORS)(get,post).
 app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie");
@@ -41,7 +41,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
 app.use('/api/submitblog', submitBlog);
 app.use('/api/getblogs', getBlogs);
 app.use('/api/getblog', getBlog);
