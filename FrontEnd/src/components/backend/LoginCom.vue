@@ -54,8 +54,8 @@
                 // (In the other way, users haven't clicked on of the tag
                 // except the "All Tag" or clicked the "All tag").
                 selectStatus: 0,
-                getUrl: 'http://127.0.0.1:3000/api/getblogs',
-                deleteUrl: 'http://127.0.0.1:3000/api/deleteblog',
+                getUrl: 'http://118.89.103.78:3000/api/getblogs',
+                deleteUrl: 'http://118.89.103.78:3000/api/deleteblog',
             };
         },
         methods: {

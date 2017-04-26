@@ -41,9 +41,9 @@
                 title: '',
                 blogContent: '',
                 dialogVisible: false,
-                submitUrl: 'http://127.0.0.1:3000/api/submitblog',
-                getUrl: 'http://127.0.0.1:3000/api/getblog',
-                updateUrl: 'http://127.0.0.1:3000/api/updateblog',
+                submitUrl: 'http://118.89.103.78:3000/api/submitblog',
+                getUrl: 'http://118.89.103.78:3000/api/getblog',
+                updateUrl: 'http://118.89.103.78:3000/api/updateblog',
                 submitBtnVisible: true,
                 updateBtnVisible: false,
             };
