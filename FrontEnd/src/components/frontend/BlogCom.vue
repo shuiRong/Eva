@@ -80,7 +80,7 @@
     }
     
     #bgImage2 {
-        background-image: url('../../assets/image/girl.jpg');
+        background-image: url('../../assets/image/girl-min.jpg');
         width: 100%;
         background-size: 100% 100%;
         background-repeat: no-repeat;
