@@ -5,7 +5,7 @@
                 <div class='nav'>
                     <el-button type='primary' v-on:click='select("all")'>全部</el-button>
                     <template v-for='(tag,index) in tags'>
-                                                                            <el-button　:type='computedColor(index)' @click='select(tag)'>{{tag}}</el-button>
+                                                                                <el-button　:type='computedColor(index)' @click='select(tag)'>{{tag}}</el-button>
 </template>
                 </div>
                 <router-link :to='{name: "NewBlogRoute",params:{id:"0"}}'>
@@ -19,7 +19,7 @@
             <div class='blogDown'>
                 <div>
                     <template v-for='tag in blog.tags'>
-                                                                                                <el-tag>{{tag}}</el-tag>
+                                                                                                    <el-tag>{{tag}}</el-tag>
 </template>
                                     </div>
                                     <span class='blogTime'>{{blog.created_at}}</span>
@@ -38,6 +38,8 @@
 </template>
 
 <script>
+    const config = require('../../config.json');
+
     export default {
         name: 'LoginComName',
         data() {
@@ -54,8 +56,8 @@
                 // (In the other way, users haven't clicked on of the tag
                 // except the "All Tag" or clicked the "All tag").
                 selectStatus: 0,
-                getUrl: 'http://172.16.222.1:3000/api/getblogs',
-                deleteUrl: 'http://172.16.222.1:3000/api/deleteblog',
+                getUrl: `${config.root}:3000/api/getblogs`,
+                deleteUrl: `${config.root}:3000/api/deleteblog`,
             };
         },
         methods: {

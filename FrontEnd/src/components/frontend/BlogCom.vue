@@ -23,6 +23,8 @@
     // Render the markdown text to html using this component
     import VueMarkdown from 'vue-markdown';
     
+    const config = require('../../config.json');
+
     export default {
         data() {
             return {
@@ -30,7 +32,7 @@
                 clientHeight: {
                     height: '600px',
                 },
-                getUrl: 'http://172.16.222.1:3000/api/getblog',
+                getUrl: `${config.root}:3000/api/getblog`,
             };
         },
         methods: {

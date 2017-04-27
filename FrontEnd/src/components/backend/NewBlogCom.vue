@@ -21,7 +21,7 @@
                 </div>
                 <el-dialog :title='title' v-model='dialogVisible' size='small' top='5%' class='previewDialog'>
                     <div>
-                        <vue-markdown :source='blogContent' ></vue-markdown>
+                        <vue-markdown :source='blogContent'></vue-markdown>
                     </div>
                 </el-dialog>
             </el-card>
@@ -32,6 +32,8 @@
 <script>
     import VueMarkdown from 'vue-markdown';
     
+    const config = require('../../config.json');
+    
     export default {
         data() {
             return {
@@ -41,9 +43,9 @@
                 title: '',
                 blogContent: '',
                 dialogVisible: false,
-                submitUrl: 'http://172.16.222.1:3000/api/submitblog',
-                getUrl: 'http://172.16.222.1:3000/api/getblog',
-                updateUrl: 'http://172.16.222.1:3000/api/updateblog',
+                submitUrl: `${config.root}:3000/api/submitblog`,
+                getUrl: `${config.root}:3000/api/getblog`,
+                updateUrl: `${config.root}:3000/api/updateblog`,
                 submitBtnVisible: true,
                 updateBtnVisible: false,
             };
@@ -178,11 +180,11 @@
         text-align: center;
     }
     
-    .blogTags .el-tag i{
+    .blogTags .el-tag i {
         color: white;
         margin-left: 0.3rem;
     }
-
+    
     .blogTags input {
         width: 5rem;
     }
@@ -222,10 +224,12 @@
         font-size: 20px;
         line-height: 1.6;
     }
-    .writeBlog .previewDialog .el-dialog__header{
-        text-align:center;
+    
+    .writeBlog .previewDialog .el-dialog__header {
+        text-align: center;
     }
-    .writeBlog .previewDialog pre{
+    
+    .writeBlog .previewDialog pre {
         word-break: break-all;
         overflow: scroll;
         background: #8492A6;
@@ -234,8 +238,9 @@
     .writeBlog .previewDialog p code {
         background: #C0CCDA;
     }
-
-    .writeBlog .previewDialog ul,.writeBlog .previewDialog ol{
+    
+    .writeBlog .previewDialog ul,
+    .writeBlog .previewDialog ol {
         padding-left: 1rem;
     }
 </style>

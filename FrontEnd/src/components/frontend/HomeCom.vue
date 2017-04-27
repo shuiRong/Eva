@@ -28,6 +28,8 @@
 </template>
 
 <script>
+    const config = require('../../config.json');
+
     export default {
         data() {
             return {
@@ -40,7 +42,7 @@
                     'margin-top': '5rem',
                 },
                 aboutDialog: false,
-                getUrl: 'http://127.0.0.1:3000/api/getblogs',
+                getUrl: `${config.root}:3000/api/getblogs`,
             };
         },
         created() {
