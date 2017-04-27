@@ -21,7 +21,7 @@
                 </div>
                 <el-dialog :title='title' v-model='dialogVisible' size='small' top='5%' class='previewDialog'>
                     <div>
-                        <vue-markdown :source='blogContent' v-highlight></vue-markdown>
+                        <vue-markdown :source='blogContent' ></vue-markdown>
                     </div>
                 </el-dialog>
             </el-card>
@@ -41,9 +41,9 @@
                 title: '',
                 blogContent: '',
                 dialogVisible: false,
-                submitUrl: 'http://118.89.103.78:3000/api/submitblog',
-                getUrl: 'http://118.89.103.78:3000/api/getblog',
-                updateUrl: 'http://118.89.103.78:3000/api/updateblog',
+                submitUrl: 'http://172.16.222.1:3000/api/submitblog',
+                getUrl: 'http://172.16.222.1:3000/api/getblog',
+                updateUrl: 'http://172.16.222.1:3000/api/updateblog',
                 submitBtnVisible: true,
                 updateBtnVisible: false,
             };
@@ -225,11 +225,17 @@
     .writeBlog .previewDialog .el-dialog__header{
         text-align:center;
     }
-    .writeBlog .previewDialog pre code {
+    .writeBlog .previewDialog pre{
+        word-break: break-all;
+        overflow: scroll;
         background: #8492A6;
     }
     
     .writeBlog .previewDialog p code {
         background: #C0CCDA;
+    }
+
+    .writeBlog .previewDialog ul,.writeBlog .previewDialog ol{
+        padding-left: 1rem;
     }
 </style>

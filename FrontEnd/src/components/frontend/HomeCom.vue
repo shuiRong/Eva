@@ -40,7 +40,7 @@
                     'margin-top': '5rem',
                 },
                 aboutDialog: false,
-                getUrl: 'http://118.89.103.78:3000/api/getblogs',
+                getUrl: 'http://127.0.0.1:3000/api/getblogs',
             };
         },
         created() {

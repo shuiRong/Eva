@@ -12,7 +12,7 @@
         </div>
         <p class='bpTime'>{{blog.created_at}}</p>
         <el-card class='bpCardContent'>
-            <vue-markdown :source='blog.content' v-highlight>
+            <vue-markdown :source='blog.content'>
             </vue-markdown>
         </el-card>
     </div>
@@ -30,7 +30,7 @@
                 clientHeight: {
                     height: '600px',
                 },
-                getUrl: 'http://118.89.103.78:3000/api/getblog',
+                getUrl: 'http://172.16.222.1:3000/api/getblog',
             };
         },
         methods: {
@@ -131,11 +131,16 @@
     
     .bpCardContent pre {
         background: #8492A6;
-        overflow: auto;
+        overflow: scroll;
         padding: 1rem;
+        word-break: break-all;
     }
     
     .bpCardContent p code {
         background: #C0CCDA;
+    }
+
+    .bpCardContent ol, .bpCardContent ul{
+        padding-left: 1rem;
     }
 </style>
