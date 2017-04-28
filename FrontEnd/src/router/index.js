@@ -1,10 +1,11 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-// import App from '@/App';
 import LoginCom from '@/components/backend/LoginCom';
-import BlogCom from '@/components/frontend/BlogCom';
-import NewBlogCom from '@/components/backend/NewBlogCom';
-import HomeCom from '@/components/frontend/HomeCom';
+
+// 路由懒加载
+const BlogCom = resolve => require(['@/components/frontend/BlogCom'], resolve);
+const HomeCom = resolve => require(['@/components/frontend/HomeCom'], resolve);
+const NewBlogCom = resolve => require(['@/components/backend/NewBlogCom'], resolve);
 
 Vue.use(Router);
 

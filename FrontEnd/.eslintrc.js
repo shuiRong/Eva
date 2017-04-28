@@ -24,6 +24,8 @@ module.exports = {
     },
     // add your custom rules here
     'rules': {
+        'global-require': 0,
+        'import/no-dynamic-require': 0,
         //允许特定前置下划线：_id
         'no-underscore-dangle': ['error', {
             'allow': ['_id']
