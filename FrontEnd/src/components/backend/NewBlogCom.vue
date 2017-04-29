@@ -4,13 +4,17 @@
             <el-input v-model='title' placeholder='标题君' class='titleInput'></el-input>
             <i class='el-icon-close' @click='backOne'></i>
             <div class='blogTags'>
-                <el-tag :key="tag" v-for="tag in blogTags" :closable="true" :close-transition="false" @close="handleClose(tag)">
+                <el-tag :key='tag' v-for='tag in blogTags' :closable='true' :close-transition='false' @close='handleClose(tag)'>
                     {{tag}}
                 </el-tag>
                 <el-input class='input-new-tag' id='inputNewTag' v-if='inputVisible' v-model='inputValue' ref='saveTagInput' size='mini' @keyup.enter.native='handleInputConfirm' @blur='handleInputConfirm'>
                 </el-input>
                 <el-button v-else class='button-new-tag' size='small' @click='showInput'>+ New Tag</el-button>
             </div>
+            <el-button class='uploadImage' icon='upload' :plain='true' type='info'>
+                图片
+                <input type='file' ref='files' @change='inputChange' id='uploadImg'>
+            </el-button>
             <el-card class='writeBlog'>
                 <el-input type='textarea' autosize resize='none' placeholder='博客内容' v-model='blogContent'>
                 </el-input>
@@ -46,8 +50,13 @@
                 submitUrl: `${config.root}:3000/api/submitblog`,
                 getUrl: `${config.root}:3000/api/getblog`,
                 updateUrl: `${config.root}:3000/api/updateblog`,
+                uploadUrl: `${config.root}:3000/api/uploadimage`,
                 submitBtnVisible: true,
                 updateBtnVisible: false,
+                fileList: [],
+                uploadHeaders: {
+                    'Content-Type': '',
+                },
             };
         },
         methods: {
@@ -61,7 +70,6 @@
                     this.$refs.saveTagInput.$refs.input.focus();
                 });
             },
-    
             handleInputConfirm() {
                 const inputValue = this.inputValue;
                 if (inputValue) {
@@ -69,6 +77,18 @@
                 }
                 this.inputVisible = false;
                 this.inputValue = '';
+            },
+            inputChange(e) {
+                const files = e.target.files;
+                const data = new FormData();
+                data.append('image', files[0]);
+    
+                this.$http.post(this.uploadUrl, data).then((res) => {
+                    const md = `![图片](${config.root}:3000/${res.body.path})`;
+                    this.blogContent += md;
+                }).catch((err) => {
+                    console.log(err);
+                });
             },
             submitBlog() {
                 // 提交新博客数据．
@@ -169,7 +189,7 @@
     }
     
     .bord-card .blogTags {
-        margin: 1rem 0 2rem 0;
+        margin: 1rem 0 1rem 0;
         display: flex;
         align-items: center;
     }
@@ -193,6 +213,28 @@
         height: 24px;
         line-height: 24px;
         padding: 0 0.5rem;
+    }
+    
+    .uploadImage {
+        width: 4rem;
+        height: 24px;
+        position: relative;
+        border-radius: 3px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        margin-bottom: 1rem;
+    }
+    
+    #uploadImg {
+        opacity: 0;
+        width: 4rem;
+        height: 24px;
+        position: absolute;
+        top: 0;
+        left: 0;
     }
     
     .bord-card .writeBlog {
@@ -223,6 +265,7 @@
         min-height: 10rem;
         font-size: 20px;
         line-height: 1.6;
+        word-break: break-all;
     }
     
     .writeBlog .previewDialog .el-dialog__header {
@@ -230,7 +273,6 @@
     }
     
     .writeBlog .previewDialog pre {
-        word-break: break-all;
         overflow: scroll;
         background: #8492A6;
     }
@@ -242,5 +284,10 @@
     .writeBlog .previewDialog ul,
     .writeBlog .previewDialog ol {
         padding-left: 1rem;
+    }
+    
+    .writeBlog .previewDialog img {
+        width: 99%;
+        height: 99%;
     }
 </style>

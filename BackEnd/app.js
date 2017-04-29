@@ -13,6 +13,7 @@ const getBlogs = require('./routes/getblogs');
 const getBlog = require('./routes/getblog');
 const deleteBlog = require('./routes/deleteblog');
 const updateBlog = require('./routes/updateblog');
+const uploadImage = require('./routes/uploadimage');
 
 
 const app = express();
@@ -42,6 +43,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'uploads')));
 
 app.use('/', index);
 app.use('/api/submitblog', submitBlog);
@@ -49,6 +51,7 @@ app.use('/api/getblogs', getBlogs);
 app.use('/api/getblog', getBlog);
 app.use('/api/deleteblog', deleteBlog);
 app.use('/api/updateblog', updateBlog);
+app.use('/api/uploadimage', uploadImage);
 
 
 // catch 404 and forward to error handler

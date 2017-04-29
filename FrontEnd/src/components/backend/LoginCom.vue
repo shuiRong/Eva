@@ -164,7 +164,7 @@
                 this.constBlogs = this.blogs;
                 this.reComputeTags();
             }).catch((err) => {
-                console.error('Error: LoginCom.vue,get blog informations failed! ', err);
+                console.error('Error: LoginCom.vue,get blogs informations failed! ', err);
             });
         },
     };

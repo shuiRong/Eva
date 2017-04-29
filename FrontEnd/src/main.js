@@ -11,6 +11,7 @@ import {
     Message,
     Input,
     MessageBox,
+    Upload,
 } from 'element-ui';
 import 'highlight.js/styles/googlecode.css';
 import App from './App';
@@ -27,8 +28,10 @@ Vue.component(Tag.name, Tag);
 Vue.component(Card.name, Card);
 Vue.component(Icon.name, Icon);
 Vue.component(Input.name, Input);
+Vue.component(Upload.name, Upload);
 Vue.prototype.$message = Message;
 Vue.prototype.$msgbox = MessageBox;
+Vue.prototype.$confirm = MessageBox.confirm;
 
 /* eslint-disable no-new */
 new Vue({

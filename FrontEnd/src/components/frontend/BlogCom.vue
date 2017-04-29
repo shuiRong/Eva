@@ -5,10 +5,10 @@
         <el-card class='bpCardTitle'>{{blog.title}}</el-card>
         <div class='bpTags'>
             <template v-for='tag in blog.tags'>
-                    <el-tag type='gray'>
-                        {{tag}}
-                    </el-tag>
-            </template>
+                        <el-tag type='gray'>
+                            {{tag}}
+                        </el-tag>
+</template>
         </div>
         <p class='bpTime'>{{blog.created_at}}</p>
         <el-card class='bpCardContent'>
@@ -24,7 +24,7 @@
     import VueMarkdown from 'vue-markdown';
     
     const config = require('../../config.json');
-
+    
     export default {
         data() {
             return {
@@ -141,8 +141,15 @@
     .bpCardContent p code {
         background: #C0CCDA;
     }
-
-    .bpCardContent ol, .bpCardContent ul{
+    
+    .bpCardContent ol,
+    .bpCardContent ul {
         padding-left: 1rem;
+    }
+    
+    .bpCardContent img {
+        width: 100%;
+        height: 100%;
+        margin: 0.5rem 0;
     }
 </style>

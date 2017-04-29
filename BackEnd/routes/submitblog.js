@@ -5,6 +5,7 @@ const NewBlog = require('../database/blog');
 const Tags = require('../database/tags');
 const moment = require('moment');
 
+
 // 把前端传来的博客数据存到数据库里．
 // save the blog data from frontend to databse.
 router.route('/')
