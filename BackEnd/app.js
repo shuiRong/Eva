@@ -4,6 +4,8 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const compression = require('compression');
+
 
 const index = require('./routes/index');
 const submitBlog = require('./routes/submitblog');
@@ -32,6 +34,7 @@ app.all('*', function(req, res, next) {
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
