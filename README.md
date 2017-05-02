@@ -15,6 +15,8 @@ Demo website : comming soon. . . (lack of a server)
 
 * Prue, consice, beatiful design
 * Markdown article written and published
+* Upload picture, transform to markdown syntax automatically
+* Netease Music hotlinking（iframe）
 * Deployment is simple
 * More sweet details
 
@@ -27,6 +29,8 @@ Demo website : comming soon. . . (lack of a server)
 ![1](/screenshots/2.png)
 
 ![1](/screenshots/3.png)
+
+![1](/screenshots/12.png)
 
 ![1](/screenshots/4.png)
 

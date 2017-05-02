@@ -16,6 +16,8 @@
 
 - 设计简洁，界面美观
 - 支持Markdown 文章的预览和发布
+- 支持上传图片，并自动转换成Markdown语法
+- 支持网易云外链
 - 部署简单
 - 设计了很多贴心的细节
 
@@ -28,6 +30,8 @@
 ![1](/screenshots/2.png)
 
 ![1](/screenshots/3.png)
+
+![1](/screenshots/12.png)
 
 ![1](/screenshots/4.png)
 

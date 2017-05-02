@@ -109,7 +109,7 @@
     }
     
     .el-tag {
-        margin: auto;
+        margin: auto 1rem;
     }
     
     .bpTime {
