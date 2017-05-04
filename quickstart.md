@@ -14,7 +14,7 @@ Hope`Eva` can be the first selection of writing blog who has special aesthetics.
 3. [Install Vue-cli](https://vuejs.org/v2/guide/installation.html)
 4. Launch MongoDB server using the command：`mongod`
 
-And then：
+**And then：**
 
 ```bash
 // clone the source code
@@ -29,5 +29,12 @@ cd FrontEnd && npm run dev
 // waiting for the program to open the window.(Port: 8080)
 ```
 
+**Attention: two config file you need to notice.**
+
+> Eva/BackEnd/config.json　(login password)
+>
+> Eva/FrontEnd/src/config.json  　(backend api address, Default: 127.0.0.1)
 
 
+
+`/auth` login page to manage blog.
