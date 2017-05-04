@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 
-
 const index = require('./routes/index');
 const submitBlog = require('./routes/submitblog');
 const getBlogs = require('./routes/getblogs');
@@ -14,7 +13,7 @@ const getBlog = require('./routes/getblog');
 const deleteBlog = require('./routes/deleteblog');
 const updateBlog = require('./routes/updateblog');
 const uploadImage = require('./routes/uploadimage');
-
+const auth = require('./routes/auth');
 
 const app = express();
 
@@ -46,6 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'uploads')));
 
 app.use('/', index);
+app.use('/api/auth', auth);
 app.use('/api/submitblog', submitBlog);
 app.use('/api/getblogs', getBlogs);
 app.use('/api/getblog', getBlog);

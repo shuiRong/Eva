@@ -5,7 +5,7 @@
                 <div class='nav'>
                     <el-button type='primary' v-on:click='select("all")'>全部</el-button>
                     <template v-for='(tag,index) in tags'>
-                                                                                <el-button　:type='computedColor(index)' @click='select(tag)'>{{tag}}</el-button>
+                                                                                                                                                <el-button　:type='computedColor(index)' @click='select(tag)'>{{tag}}</el-button>
 </template>
                 </div>
                 <router-link :to='{name: "NewBlogRoute",params:{id:"0"}}'>
@@ -19,7 +19,7 @@
             <div class='blogDown'>
                 <div>
                     <template v-for='tag in blog.tags'>
-                                                                                                    <el-tag>{{tag}}</el-tag>
+                                                                                                                                                                    <el-tag>{{tag}}</el-tag>
 </template>
                                     </div>
                                     <span class='blogTime'>{{blog.created_at}}</span>
@@ -39,7 +39,7 @@
 
 <script>
     const config = require('../../config.json');
-
+    
     export default {
         name: 'LoginComName',
         data() {
@@ -166,6 +166,19 @@
             }).catch((err) => {
                 console.error('Error: LoginCom.vue,get blogs informations failed! ', err);
             });
+        },
+        beforeRouteEnter(to, from, next) {
+            if (from.meta.authed === true) {
+                next();
+            } else {
+                next({
+                    path: '/auth',
+                });
+            }
+        },
+        beforeRouteLeave(to, from, next) {
+            this.$route.meta.authed = true;
+            next();
         },
     };
 </script>

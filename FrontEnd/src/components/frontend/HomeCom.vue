@@ -10,15 +10,15 @@
         </div>
         <div id='blogSec' :style='distanceOfTop'>
             <template v-for='blog in blogs'>
-                                                                                                                <el-card class='homeBlogCard'>
-                                                                                                                    <router-link :to='{name: "BlogRoute", params:{id: blog._id}}'>
-                                                                                                                        {{blog.title}}
-                                                                                                                    </router-link>
-                                                                                                                    <div>
-                                                                                                                        <template v-for='tag in blog.tags'>
-                                                                                                                            <el-tag type='gray'>
-                                                                                                                                {{tag}}
-                                                                                                                            </el-tag>
+                                                                                                                    <el-card class='homeBlogCard'>
+                                                                                                                        <router-link :to='{name: "BlogRoute", params:{id: blog._id}}'>
+                                                                                                                            {{blog.title}}
+                                                                                                                        </router-link>
+                                                                                                                        <div>
+                                                                                                                            <template v-for='tag in blog.tags'>
+                                                                                                                                <el-tag type='gray'>
+                                                                                                                                    {{tag}}
+                                                                                                                                </el-tag>
 </template>
                     </div>
                 </el-card>
@@ -29,7 +29,7 @@
 
 <script>
     const config = require('../../config.json');
-
+    
     export default {
         data() {
             return {
@@ -75,6 +75,10 @@
             window.onresize = function temp() {
                 that.clientHeight.height = `${document.documentElement.clientHeight}px`;
             };
+        },
+        beforeRouteLeave(to, from, next) {
+            this.$route.meta.authed = true;
+            next();
         },
     };
 </script>

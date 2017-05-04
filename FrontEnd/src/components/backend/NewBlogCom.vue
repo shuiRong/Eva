@@ -159,6 +159,19 @@
                 });
             }
         },
+        beforeRouteEnter(to, from, next) {
+            if (from.meta.authed === true) {
+                next();
+            } else {
+                next({
+                    path: '/auth',
+                });
+            }
+        },
+        beforeRouteLeave(to, from, next) {
+            this.$route.meta.authed = true;
+            next();
+        },
         components: {
             VueMarkdown,
         },
