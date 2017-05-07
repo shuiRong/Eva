@@ -5,9 +5,9 @@
         <el-card class='bpCardTitle'>{{blog.title}}</el-card>
         <div class='bpTags'>
             <template v-for='tag in blog.tags'>
-                            <el-tag type='gray'>
-                                {{tag}}
-                            </el-tag>
+                                <el-tag type='gray'>
+                                    {{tag}}
+                                </el-tag>
 </template>
         </div>
         <p class='bpTime'>{{blog.created_at}}</p>
@@ -50,10 +50,17 @@
         created() {
             // 在Vue实例created时期从服务器获取博客数据．
             // Get the blog data from remote server in the created period.
-            this.$http.post(this.getUrl, {
+            // this.$http.post(this.getUrl, {
+            //     id: this.$route.params.id,
+            // }).then((res) => {
+            //     this.blog = res.data;
+            // }).catch((err) => {
+            //     console.error('Error: Get the blog infomation failed! ', err);
+            // });
+            this.$post(this.getUrl, {
                 id: this.$route.params.id,
             }).then((res) => {
-                this.blog = res.data;
+                this.blog = res;
             }).catch((err) => {
                 console.error('Error: Get the blog infomation failed! ', err);
             });

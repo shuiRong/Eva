@@ -5,7 +5,7 @@
                 <div class='nav'>
                     <el-button type='primary' v-on:click='select("all")'>全部</el-button>
                     <template v-for='(tag,index) in tags'>
-                                                                                                                                                <el-button　:type='computedColor(index)' @click='select(tag)'>{{tag}}</el-button>
+                                                                                                                                                                <el-button　:type='computedColor(index)' @click='select(tag)'>{{tag}}</el-button>
 </template>
                 </div>
                 <router-link :to='{name: "NewBlogRoute",params:{id:"0"}}'>
@@ -19,7 +19,7 @@
             <div class='blogDown'>
                 <div>
                     <template v-for='tag in blog.tags'>
-                                                                                                                                                                    <el-tag>{{tag}}</el-tag>
+                                                                                                                                                                                    <el-tag>{{tag}}</el-tag>
 </template>
                                     </div>
                                     <span class='blogTime'>{{blog.created_at}}</span>
@@ -80,7 +80,7 @@
                         type: 'success',
                         message: '删除成功!',
                     });
-                    this.$http.post(this.deleteUrl, {
+                    this.$post(this.deleteUrl, {
                         id: blogId,
                     }).then(() => {
                         // 顺便一提，服务器端删除博客成功之后，主动删除this.blogs里的相关数据．这样正好会触发vue视图更新．双向绑定特性用着挺爽的．
@@ -156,11 +156,10 @@
         },
         mounted() {
             // get the blogs data from remote server.
-            this.$http({
-                url: this.getUrl,
-                methods: 'get',
-            }).then((res) => {
-                this.blogs = res.data.reverse();
+            this.$get(
+                this.getUrl,
+            ).then((res) => {
+                this.blogs = res.reverse();
                 this.constBlogs = this.blogs;
                 this.reComputeTags();
             }).catch((err) => {

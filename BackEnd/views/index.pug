@@ -1,5 +1,10 @@
-extends layout
+doctype html
+html
 
-block content
-  h1= title
-  p Welcome to #{title}
+head
+    meta(charset="utf-8")
+    title HyperMD
+body
+    div(id="test-box")
+        button(id="raw_mode") Raw Mode
+        button(id="hypermd_mode") HyperMD Mode

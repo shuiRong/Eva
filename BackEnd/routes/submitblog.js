@@ -26,7 +26,7 @@ router.route('/')
 
         saveBlog.then((value) => {
             res.json({
-                'status': 'submit success',
+                'status': 200,
             });
         }, (err) => {
             console.error('Error: submitblog.js line:27', err);

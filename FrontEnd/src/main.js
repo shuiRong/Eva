@@ -1,7 +1,6 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
-import VueSource from 'vue-resource';
 import {
     Button,
     Dialog,
@@ -13,6 +12,7 @@ import {
     MessageBox,
     Upload,
 } from 'element-ui';
+import XHR from '@/assets/js/xhr';
 import 'highlight.js/styles/googlecode.css';
 import App from './App';
 import router from './router';
@@ -20,7 +20,7 @@ import router from './router';
 const hljs = require('./highlight.js');
 
 Vue.config.productionTip = false;
-Vue.use(VueSource);
+Vue.use(XHR);
 Vue.use(hljs);
 Vue.component(Button.name, Button);
 Vue.component(Dialog.name, Dialog);

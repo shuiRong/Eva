@@ -10,15 +10,15 @@
         </div>
         <div id='blogSec' :style='distanceOfTop'>
             <template v-for='blog in blogs'>
-                                                                                                                    <el-card class='homeBlogCard'>
-                                                                                                                        <router-link :to='{name: "BlogRoute", params:{id: blog._id}}'>
-                                                                                                                            {{blog.title}}
-                                                                                                                        </router-link>
-                                                                                                                        <div>
-                                                                                                                            <template v-for='tag in blog.tags'>
-                                                                                                                                <el-tag type='gray'>
-                                                                                                                                    {{tag}}
-                                                                                                                                </el-tag>
+                                                                                                                        <el-card class='homeBlogCard'>
+                                                                                                                            <router-link :to='{name: "BlogRoute", params:{id: blog._id}}'>
+                                                                                                                                {{blog.title}}
+                                                                                                                            </router-link>
+                                                                                                                            <div>
+                                                                                                                                <template v-for='tag in blog.tags'>
+                                                                                                                                    <el-tag type='gray'>
+                                                                                                                                        {{tag}}
+                                                                                                                                    </el-tag>
 </template>
                     </div>
                 </el-card>
@@ -48,11 +48,8 @@
         created() {
             // 在Vue实例created时期从服务器获取博客数据．
             // Get the blog data from remote server in the created period.
-            this.$http({
-                url: this.getUrl,
-                methods: 'get',
-            }).then((res) => {
-                this.blogs = res.body.reverse();
+            this.$get(this.getUrl).then((res) => {
+                this.blogs = res.reverse();
                 // 动态设置博客块的margin-top.
                 // Set the blog section's margin-top dynamically.
                 if (this.blogs.length <= 3) {

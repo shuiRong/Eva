@@ -22,11 +22,10 @@
         },
         methods: {
             auth() {
-                this.$http.post(this.subUrl, {
+                this.$post(this.subUrl, {
                     passwd: this.passwd,
                 }).then((res) => {
-                    console.log(res);
-                    if (res.body.status === 'ok') {
+                    if (res.status === 'ok') {
                         this.$message({
                             message: '登录成功',
                             type: 'success',

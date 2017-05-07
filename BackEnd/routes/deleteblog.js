@@ -12,7 +12,9 @@ router.route('/')
         Blog.deleteOne({
             '_id': id
         }, (err, doc) => {
-            err ? console.error('Error: delete the blog Failed. DeleteBlog.js', err) : res.end();
+            err ? console.error('Error: delete the blog Failed. DeleteBlog.js', err) : res.send({
+                'status': 200
+            });
         });
     });
 

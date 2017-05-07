@@ -24,6 +24,9 @@ module.exports = {
     },
     // add your custom rules here
     'rules': {
+        'no-param-reassign': ['error', {
+            'props': false,
+        }],
         'global-require': 0,
         'import/no-dynamic-require': 0,
         //允许特定前置下划线：_id

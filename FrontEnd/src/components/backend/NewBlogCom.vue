@@ -79,21 +79,25 @@
                 this.inputValue = '';
             },
             inputChange(e) {
-                const files = e.target.files;
-                const data = new FormData();
-                data.append('image', files[0]);
-    
-                this.$http.post(this.uploadUrl, data).then((res) => {
-                    const md = `![图片](${config.root}:3000/${res.body.path})`;
-                    this.blogContent += md;
-                }).catch((err) => {
-                    console.log(err);
-                });
+                const files = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = (ee) => {
+                    const data = {
+                        base64: ee.target.result,
+                    };
+                    this.$post(this.uploadUrl, data).then((res) => {
+                        const md = `![图片](${config.root}:3000${res.path})`;
+                        this.blogContent += md;
+                    }).catch((err) => {
+                        console.info('Error: newBlogCom.vue ', err);
+                    });
+                };
+                reader.readAsDataURL(files);
             },
             submitBlog() {
                 // 提交新博客数据．
                 // post new blog data.
-                this.$http.post(this.submitUrl, {
+                this.$post(this.submitUrl, {
                     blogTitle: this.title,
                     blogTags: this.blogTags,
                     blogContent: this.blogContent,
@@ -108,13 +112,13 @@
             updateBlog() {
                 // 提交更新的博客数据．
                 // post updated blog data.
-                this.$http.post(this.updateUrl, {
+                this.$post(this.updateUrl, {
                     id: this.$route.params.id,
                     title: this.title,
                     tags: this.blogTags,
                     content: this.blogContent,
                 }).then((res) => {
-                    if (res.status === 200) {
+                    if (res.code === 200) {
                         this.open('博客更新成功！');
                     }
                 }).catch((err) => {
@@ -147,10 +151,10 @@
                 this.submitBtnVisible = false;
                 this.updateBtnVisible = true;
                 // 从服务器拉取博客数据，推送到视图中
-                this.$http.post(this.getUrl, {
+                this.$post(this.getUrl, {
                     id,
                 }).then((res) => {
-                    const data = res.body;
+                    const data = res;
                     this.title = data.title;
                     this.blogContent = data.content;
                     this.blogTags = data.tags;
