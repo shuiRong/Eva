@@ -153,6 +153,7 @@
                 // 从服务器拉取博客数据，推送到视图中
                 this.$post(this.getUrl, {
                     id,
+                    req: 'preview',
                 }).then((res) => {
                     const data = res;
                     this.title = data.title;
@@ -290,12 +291,15 @@
     }
     
     .writeBlog .previewDialog pre {
-        overflow: scroll;
+        overflow: auto;
         background: #8492A6;
+        padding: 1rem;
     }
     
     .writeBlog .previewDialog p code {
-        background: #C0CCDA;
+        background: #D3DCE6;
+        padding: 0 0.2rem;
+        margin: 0 0.2rem;
     }
     
     .writeBlog .previewDialog ul,

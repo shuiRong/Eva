@@ -44,3 +44,11 @@ cd FrontEnd && npm run dev
 
 
 `/auth` 后台管理的登录界面
+
+PS: 用`cnpm`安装`babel-plugin-component`的时侯会报错:
+
+````shell
+Error: post install error, please remove node_modules before retry
+````
+
+解决办法是用`npm`．

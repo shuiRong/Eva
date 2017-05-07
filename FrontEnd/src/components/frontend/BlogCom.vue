@@ -5,9 +5,9 @@
         <el-card class='bpCardTitle'>{{blog.title}}</el-card>
         <div class='bpTags'>
             <template v-for='tag in blog.tags'>
-                                <el-tag type='gray'>
-                                    {{tag}}
-                                </el-tag>
+                                                <el-tag type='gray'>
+                                                    {{tag}}
+                                                </el-tag>
 </template>
         </div>
         <p class='bpTime'>{{blog.created_at}}</p>
@@ -59,6 +59,7 @@
             // });
             this.$post(this.getUrl, {
                 id: this.$route.params.id,
+                req: '', // 返回博客所有数据,
             }).then((res) => {
                 this.blog = res;
             }).catch((err) => {
@@ -144,13 +145,15 @@
     
     .bpCardContent pre {
         background: #8492A6;
-        overflow: scroll;
+        overflow: auto;
         padding: 1rem;
         word-break: break-all;
     }
     
     .bpCardContent p code {
-        background: #C0CCDA;
+        background: #D3DCE6;
+        padding: 0 0.2rem;
+        margin: 0 0.2rem;
     }
     
     .bpCardContent ol,

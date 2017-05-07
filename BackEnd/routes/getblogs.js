@@ -9,7 +9,21 @@ router.route('/')
     .get((req, res) => {
         let getBlog = new Promise((resolve, reject) => {
             Blog.find({}, (err, doc) => {
-                err ? reject(err) : resolve(doc);
+                if (err) {
+                    reject(err);
+                } else {
+                    let arr = [];
+                    let obj;
+                    for (blog of doc) {
+                        obj = {
+                            _id: blog._id,
+                            title: blog.title,
+                            tags: blog.tags,
+                        }
+                        arr.push(obj);
+                    }
+                    res.json(arr);
+                }
             });
         });
         getBlog.then((data) => {
