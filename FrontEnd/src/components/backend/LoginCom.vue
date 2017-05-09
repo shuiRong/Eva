@@ -1,11 +1,11 @@
 <template>
-    <div class='container'>
+    <div class='container' v-loading.fullscreen.lock='loading'>
         <el-card class='bord-card'>
             <div class='mainContent'>
                 <div class='nav'>
                     <el-button type='primary' v-on:click='select("all")'>全部</el-button>
                     <template v-for='(tag,index) in tags'>
-                                                                                                                                                                <el-button　:type='computedColor(index)' @click='select(tag)'>{{tag}}</el-button>
+                                                                                                                                                                    <el-button　:type='computedColor(index)' @click='select(tag)'>{{tag}}</el-button>
 </template>
                 </div>
                 <router-link :to='{name: "NewBlogRoute",params:{id:"0"}}'>
@@ -19,7 +19,7 @@
             <div class='blogDown'>
                 <div>
                     <template v-for='tag in blog.tags'>
-                                                                                                                                                                                    <el-tag>{{tag}}</el-tag>
+                                                                                                                                                                                        <el-tag>{{tag}}</el-tag>
 </template>
                                     </div>
                                     <span class='blogTime'>{{blog.created_at}}</span>
@@ -58,6 +58,7 @@
                 selectStatus: 0,
                 getUrl: `${config.root}:3000/api/getblogs`,
                 deleteUrl: `${config.root}:3000/api/deleteblog`,
+                loading: true,
             };
         },
         methods: {
@@ -160,6 +161,7 @@
                 this.getUrl,
             ).then((res) => {
                 this.blogs = res.reverse();
+                this.loading = false;
                 this.constBlogs = this.blogs;
                 this.reComputeTags();
             }).catch((err) => {

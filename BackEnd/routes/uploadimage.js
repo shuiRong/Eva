@@ -1,13 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
-const multer = require('multer');
-const upload = multer({
-    dest: 'uploads/images/',
-})
 
 router.route('/')
-    .post(upload.single('image'), (req, res) => {
+    .post((req, res) => {
         let base64 = req.body.base64;
         //去掉base64数据最前面的＂图片类型＂字符串
         let type = base64.match(/^data:image\/(.+);/)[1];

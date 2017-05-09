@@ -1,5 +1,5 @@
 <template>
-    <div class='container'>
+    <div class='container' v-loading.fullscreen.lock='loading'>
         <el-card class='bord-card'>
             <el-input v-model='title' placeholder='标题君' class='titleInput'></el-input>
             <i class='el-icon-close' @click='backOne'></i>
@@ -57,6 +57,7 @@
                 uploadHeaders: {
                     'Content-Type': '',
                 },
+                loading: true,
             };
         },
         methods: {
@@ -156,12 +157,15 @@
                     req: 'preview',
                 }).then((res) => {
                     const data = res;
+                    this.loading = false;
                     this.title = data.title;
                     this.blogContent = data.content;
                     this.blogTags = data.tags;
                 }).catch((err) => {
                     console.error('Error: Get the blog error:', err);
                 });
+            } else {
+                this.loading = false;
             }
         },
         beforeRouteEnter(to, from, next) {

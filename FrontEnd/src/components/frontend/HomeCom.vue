@@ -1,5 +1,5 @@
 <template>
-    <div class='homePage'>
+    <div class='homePage' v-loading.fullscreen.lock='loading'>
         <i class='el-icon-more' @click='aboutDialog=true'></i>
         <el-dialog title='林水溶' v-model='aboutDialog' size='tiny'>
             <p>要做我的小迷妹嘛？（ 滑稽 ）</p>
@@ -43,6 +43,7 @@
                 },
                 aboutDialog: false,
                 getUrl: `${config.root}:3000/api/getblogs`,
+                loading: true,
             };
         },
         created() {
@@ -50,6 +51,7 @@
             // Get the blog data from remote server in the created period.
             this.$get(this.getUrl).then((res) => {
                 this.blogs = res.reverse();
+                this.loading = false;
                 // 动态设置博客块的margin-top.
                 // Set the blog section's margin-top dynamically.
                 if (this.blogs.length <= 3) {
