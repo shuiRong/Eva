@@ -1,13 +1,13 @@
-<template >
+<template>
     <div class='blogPage' v-loading.fullscreen.lock='loading'>
         <div id='bgImage2' :style='clientHeight' @click='backToHome'>
         </div>
-        <el-card class='bpCardTitle' >{{blog.title}}</el-card>
+        <el-card class='bpCardTitle'>{{blog.title}}</el-card>
         <div class='bpTags'>
             <template v-for='tag in blog.tags'>
-                                                    <el-tag type='gray'>
-                                                        {{tag}}
-                                                    </el-tag>
+                                                        <el-tag type='gray'>
+                                                            {{tag}}
+                                                        </el-tag>
 </template>
         </div>
         <p class='bpTime'>{{blog.created_at}}</p>
