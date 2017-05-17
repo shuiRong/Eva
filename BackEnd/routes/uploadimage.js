@@ -10,6 +10,20 @@ router.route('/')
         base64 = base64.replace(/^data:image\/\w+;base64,/, "");
         // 解码base64成二进制数据．
         let data = new Buffer(base64, 'base64');
+
+        let fsExistsSync = (path) => {
+                try {
+                    fs.accessSync(path, fs.F_OK);
+                } catch (e) {
+                    return false;
+                }
+                return true;
+            }
+            // 如果Home文件夹下，此目录不存在．就新建一个．
+        if (!fsExistsSync('/home/shuirong/uploads/images')) {
+            fs.mkdirSync('/home/shuirong/uploads');
+            fs.mkdirSync('/home/shuirong/uploads/images');
+        }
         const name = `uploads/images/${String(new Date()).replace(/[ :]/g,'').match(/.{6}(.{12})/)[1]}.${type}`;
         fs.open(name, "a", 0644, function(e, fd) {
             if (e) throw e;
