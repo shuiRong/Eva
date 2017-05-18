@@ -79,10 +79,10 @@
                 this.inputVisible = false;
                 this.inputValue = '';
             },
-            inputChange(e) {
-                const files = e.target.files[0];
+            inputChange() {
+                const files = document.getElementById('uploadImg').files[0];
                 const reader = new FileReader();
-                reader.onload = (ee) => {
+                reader.addEventListener('load', (ee) => {
                     const data = {
                         base64: ee.target.result,
                     };
@@ -92,7 +92,7 @@
                     }).catch((err) => {
                         console.info('Error: newBlogCom.vue ', err);
                     });
-                };
+                });
                 reader.readAsDataURL(files);
             },
             submitBlog() {
