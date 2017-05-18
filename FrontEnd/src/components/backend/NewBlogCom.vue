@@ -86,12 +86,14 @@
                     const data = {
                         base64: ee.target.result,
                     };
-                    this.$post(this.uploadUrl, data).then((res) => {
+                    let setTime = setTimeout(function(){this.$post(this.uploadUrl, data).then((res) => {
                         const md = `![图片](${config.root}:3000${res.path})`;
                         this.blogContent += md;
+                        clear(setTime);
                     }).catch((err) => {
+                        clear(setTime);
                         console.info('Error: newBlogCom.vue ', err);
-                    });
+                    });},100)
                 });
                 reader.readAsDataURL(files);
             },

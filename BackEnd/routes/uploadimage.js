@@ -12,17 +12,16 @@ router.route('/')
         let data = new Buffer(base64, 'base64');
 
         let fsExistsSync = (path) => {
-                try {
-                    fs.accessSync(path, fs.F_OK);
-                } catch (e) {
-                    return false;
-                }
-                return true;
+            try {
+                fs.accessSync(path, fs.F_OK);
+            } catch (e) {
+                return false;
             }
-            // 如果Home文件夹下，此目录不存在．就新建一个．
-        if (!fsExistsSync('/home/shuirong/uploads/images')) {
-            fs.mkdirSync('/home/shuirong/uploads');
-            fs.mkdirSync('/home/shuirong/uploads/images');
+            return true;
+        }
+        if (!fsExistsSync('uploads/images')) {
+            fs.mkdirSync('uploads');
+            fs.mkdirSync('uploads/images');
         }
         const name = `uploads/images/${String(new Date()).replace(/[ :]/g,'').match(/.{6}(.{12})/)[1]}.${type}`;
         fs.open(name, "a", 0644, function(e, fd) {
