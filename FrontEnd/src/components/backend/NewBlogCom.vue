@@ -86,20 +86,12 @@
                     const data = {
                         base64: ee.target.result,
                     };
-                    console.info(data);
-                    const fakeData = {
-                        base64: 'test text'
-                    };
-                    const setTime = setTimeout(() => {
-                        this.$post(this.uploadUrl, fakeData).then((res) => {
-                            const md = `![图片](${config.root}:3000${res.path})`;
-                            this.blogContent += md;
-                            clearTimeout(setTime);
-                        }).catch((err) => {
-                            clearTimeout(setTime);
-                            console.info('Error: newBlogCom.vue ', err);
-                        });
-                    }, 100);
+                    this.$post(this.uploadUrl, data).then((res) => {
+                        const md = `![图片](${config.root}:3000${res.path})`;
+                        this.blogContent += md;
+                    }).catch((err) => {
+                        console.info('Error: newBlogCom.vue ', err);
+                    });
                 });
                 reader.readAsDataURL(files);
             },
