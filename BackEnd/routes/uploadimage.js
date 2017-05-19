@@ -15,16 +15,21 @@ router.route('/')
         // 解码base64成二进制数据．
         let data = new Buffer(base64, 'base64');
         const name = `uploads/images/${String(new Date()).replace(/[ :]/g,'').match(/.{6}(.{12})/)[1]}.${type}`;
-        fs.open(name, "a", 0644, function(e, fd) {
-            if (e) throw e;
-            fs.write(fd, data, function(e) {
-                if (e) throw e;
-                fs.closeSync(fd);
-                res.json({
-                    'path': name.replace('uploads', ''),
-                });
-            });
+        console.log('____________name:', name);
+        console.log(base64);
+        res.json({
+            'path': 'temppath',
         });
+        // fs.open(name, "a", 0644, function(e, fd) {
+        //     if (e) throw e;
+        //     fs.write(fd, data, function(e) {
+        //         if (e) throw e;
+        //         fs.closeSync(fd);
+        //         res.json({
+        //             'path': name.replace('uploads', ''),
+        //         });
+        //     });
+        // });
 
     });
 
