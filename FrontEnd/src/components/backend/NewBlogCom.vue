@@ -86,8 +86,12 @@
                     const data = {
                         base64: ee.target.result,
                     };
+                    console.info(data);
+                    const fakeData = {
+                        base64: 'test text'
+                    };
                     const setTime = setTimeout(() => {
-                        this.$post(this.uploadUrl, data).then((res) => {
+                        this.$post(this.uploadUrl, fakeData).then((res) => {
                             const md = `![图片](${config.root}:3000${res.path})`;
                             this.blogContent += md;
                             clearTimeout(setTime);
