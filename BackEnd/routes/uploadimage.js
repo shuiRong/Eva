@@ -4,6 +4,7 @@ const fs = require('fs');
 
 router.route('/')
     .post((req, res) => {
+
         let fsExistsSync = (path) => {
             try {
                 fs.accessSync(path, fs.F_OK);
