@@ -3,21 +3,19 @@ const router = express.Router();
 const config = require('../config.json');
 const md5 = require('crypto-js/md5');
 
-// Auth password and generate a hashed key.
 router.route('/')
     .post((req, res) => {
-        const passwd = req.body.passwd;
+        const key = req.body.key;
         const privateKey = '>zX(KS*&1@hs3.4';
-        const hashedKey = md5(passwd + privateKey).toString();
-        if (passwd === config.passwd) {
+        const hashedKey = md5(config.passwd + privateKey).toString();
+        if (hashedKey === key) {
             res.json({
                 'status': 'ok',
-                'key': hashedKey,
             });
         } else {
             res.json({
                 'status': 'failed',
-            });
+            })
         }
     });
 

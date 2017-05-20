@@ -30,7 +30,7 @@
                             message: '登录成功',
                             type: 'success',
                         });
-                        this.$route.meta.authed = true;
+                        document.cookie = `key=${res.key};path=/;max-age=${60 * 60 * 24 * 7};`;
                         this.passwd = '';
                         this.$router.push({
                             path: '/login',

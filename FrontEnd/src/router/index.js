@@ -19,16 +19,10 @@ export default new Router({
     }, {
         path: '/login',
         name: 'LoginRoute',
-        meta: {
-            authed: false,
-        },
         component: LoginCom,
     }, {
         path: '/blog/:id',
         name: 'BlogRoute',
-        meta: {
-            authed: false,
-        },
         component: BlogCom,
     }, {
         path: '/new/:id',
@@ -37,9 +31,6 @@ export default new Router({
     }, {
         path: '/auth',
         name: 'AuthRoute',
-        meta: {
-            authed: false,
-        },
         component: AuthCom,
     }],
 });

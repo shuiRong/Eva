@@ -14,6 +14,7 @@ const deleteBlog = require('./routes/deleteblog');
 const updateBlog = require('./routes/updateblog');
 const uploadImage = require('./routes/uploadimage');
 const auth = require('./routes/auth');
+const authkey = require('./routes/authkey');
 
 const app = express();
 
@@ -54,6 +55,7 @@ app.use('/api/getblog', getBlog);
 app.use('/api/deleteblog', deleteBlog);
 app.use('/api/updateblog', updateBlog);
 app.use('/api/uploadimage', uploadImage);
+app.use('/api/authkey', authkey);
 
 
 // catch 404 and forward to error handler

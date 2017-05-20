@@ -51,6 +51,7 @@
                 getUrl: `${config.root}:3000/api/getblog`,
                 updateUrl: `${config.root}:3000/api/updateblog`,
                 uploadUrl: `${config.root}:3000/api/uploadimage`,
+                authUrl: `${config.root}:3000/api/authkey`,
                 submitBtnVisible: true,
                 updateBtnVisible: false,
                 fileList: [],
@@ -168,17 +169,21 @@
                 this.loading = false;
             }
         },
-        beforeRouteEnter(to, from, next) {
-            if (from.meta.authed === true) {
-                next();
-            } else {
-                next({
-                    path: '/auth',
+        beforeRouteLeave(to, from, next) {
+            if (to.name === 'LoginRoute') {
+                const theCookie = document.cookie.match(/key=(.{32})/)[1];
+                this.$post(this.authUrl, {
+                    key: theCookie,
+                }).then((res) => {
+                    if (res.status === 'ok') {
+                        next();
+                    } else {
+                        next({
+                            path: '/auth',
+                        });
+                    }
                 });
             }
-        },
-        beforeRouteLeave(to, from, next) {
-            this.$route.meta.authed = true;
             next();
         },
         components: {

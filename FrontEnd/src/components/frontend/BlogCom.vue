@@ -5,9 +5,9 @@
         <el-card class='bpCardTitle'>{{blog.title}}</el-card>
         <div class='bpTags'>
             <template v-for='tag in blog.tags'>
-                                                        <el-tag type='gray'>
-                                                            {{tag}}
-                                                        </el-tag>
+                                                                                                                    <el-tag type='gray'>
+                                                                                                                        {{tag}}
+                                                                                                                    </el-tag>
 </template>
         </div>
         <p class='bpTime'>{{blog.created_at}}</p>
@@ -33,6 +33,7 @@
                     height: '600px',
                 },
                 getUrl: `${config.root}:3000/api/getblog`,
+                authUrl: `${config.root}:3000/api/authkey`,
                 loading: true,
             };
         },
@@ -83,7 +84,26 @@
             };
         },
         beforeRouteLeave(to, from, next) {
-            this.$route.meta.authed = true;
+            if (to.name !== 'HomeRoute') {
+                try {
+                    const theCookie = document.cookie.match(/key=(.{32})/)[1];
+                    this.$post(this.authUrl, {
+                        key: theCookie,
+                    }).then((res) => {
+                        if (res.status === 'ok') {
+                            next();
+                        } else {
+                            next({
+                                path: '/auth',
+                            });
+                        }
+                    });
+                } catch (e) {
+                    next({
+                        path: '/',
+                    });
+                }
+            }
             next();
         },
     };
