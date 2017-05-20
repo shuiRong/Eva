@@ -10,15 +10,15 @@
         </div>
         <div id='blogSec' :style='distanceOfTop'>
             <template v-for='blog in blogs'>
-                                                                                                                                                                                                        <el-card class='homeBlogCard'>
-                                                                                                                                                                                                            <router-link :to='{name: "BlogRoute", params:{id: blog._id}}'>
-                                                                                                                                                                                                                {{blog.title}}
-                                                                                                                                                                                                            </router-link>
-                                                                                                                                                                                                            <div>
-                                                                                                                                                                                                                <template v-for='tag in blog.tags'>
-                                                                                                                                                                                                                    <el-tag type='gray'>
-                                                                                                                                                                                                                        {{tag}}
-                                                                                                                                                                                                                    </el-tag>
+                                                                                                                                                                                                                    <el-card class='homeBlogCard'>
+                                                                                                                                                                                                                        <router-link :to='{name: "BlogRoute", params:{id: blog._id}}'>
+                                                                                                                                                                                                                            {{blog.title}}
+                                                                                                                                                                                                                        </router-link>
+                                                                                                                                                                                                                        <div>
+                                                                                                                                                                                                                            <template v-for='tag in blog.tags'>
+                                                                                                                                                                                                                                <el-tag type='gray'>
+                                                                                                                                                                                                                                    {{tag}}
+                                                                                                                                                                                                                                </el-tag>
 </template>
                     </div>
                 </el-card>
@@ -77,7 +77,7 @@
             };
         },
         beforeRouteLeave(to, from, next) {
-            if (to.name !== 'BlogRoute') {
+            if (to.name !== 'BlogRoute' && to.name !== 'AuthRoute') {
                 try {
                     const theCookie = document.cookie.match(/key=(.{32})/)[1];
                     this.$post(this.authUrl, {

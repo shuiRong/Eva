@@ -59,6 +59,7 @@
                     'Content-Type': '',
                 },
                 loading: true,
+                theCookie: document.cookie.match(/key=(.{32})/)[1],
             };
         },
         methods: {
@@ -86,6 +87,7 @@
                 reader.addEventListener('load', (ee) => {
                     const data = {
                         base64: ee.target.result,
+                        key: this.theCookie,
                     };
                     this.$post(this.uploadUrl, data).then((res) => {
                         const md = `![图片](${config.root}:3000${res.path})`;
@@ -103,6 +105,7 @@
                     blogTitle: this.title,
                     blogTags: this.blogTags,
                     blogContent: this.blogContent,
+                    key: this.theCookie,
                 }).then((res) => {
                     if (res.status === 200) {
                         this.open('博客提交成功！');
@@ -119,6 +122,7 @@
                     title: this.title,
                     tags: this.blogTags,
                     content: this.blogContent,
+                    key: this.theCookie,
                 }).then((res) => {
                     if (res.code === 200) {
                         this.open('博客更新成功！');
@@ -171,9 +175,8 @@
         },
         beforeRouteLeave(to, from, next) {
             if (to.name === 'LoginRoute') {
-                const theCookie = document.cookie.match(/key=(.{32})/)[1];
                 this.$post(this.authUrl, {
-                    key: theCookie,
+                    key: this.theCookie,
                 }).then((res) => {
                     if (res.status === 'ok') {
                         next();

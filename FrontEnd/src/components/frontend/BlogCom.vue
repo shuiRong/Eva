@@ -5,9 +5,9 @@
         <el-card class='bpCardTitle'>{{blog.title}}</el-card>
         <div class='bpTags'>
             <template v-for='tag in blog.tags'>
-                                                                                                                    <el-tag type='gray'>
-                                                                                                                        {{tag}}
-                                                                                                                    </el-tag>
+                                                                                                                                <el-tag type='gray'>
+                                                                                                                                    {{tag}}
+                                                                                                                                </el-tag>
 </template>
         </div>
         <p class='bpTime'>{{blog.created_at}}</p>
@@ -84,7 +84,7 @@
             };
         },
         beforeRouteLeave(to, from, next) {
-            if (to.name !== 'HomeRoute') {
+            if (to.name !== 'HomeRoute' && to.name !== 'AuthRoute') {
                 try {
                     const theCookie = document.cookie.match(/key=(.{32})/)[1];
                     this.$post(this.authUrl, {

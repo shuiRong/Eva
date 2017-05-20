@@ -1,9 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
+const config = require('../config.json');
+const md5 = require('crypto-js/md5');
 
 router.route('/')
     .post((req, res) => {
+        // Auth the hashed key
+        let key = req.body.key;
+        const privateKey = config.privateKey;
+        const hashedKey = md5(config.passwd + privateKey).toString();
+        if (hashedKey !== key) {
+            res.send({
+                'status': 'failed',
+            });
+        };
 
         let fsExistsSync = (path) => {
             try {

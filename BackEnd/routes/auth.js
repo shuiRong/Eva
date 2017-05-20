@@ -7,7 +7,7 @@ const md5 = require('crypto-js/md5');
 router.route('/')
     .post((req, res) => {
         const passwd = req.body.passwd;
-        const privateKey = '>zX(KS*&1@hs3.4';
+        const privateKey = config.privateKey;
         const hashedKey = md5(passwd + privateKey).toString();
         if (passwd === config.passwd) {
             res.json({

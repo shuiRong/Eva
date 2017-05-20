@@ -1,11 +1,11 @@
 <template>
-    <div class='container' v-loading.fullscreen.lock='loading'>
+    <div class='container' v-loading.fullscreen.lock='loading' @click='btHome'>
         <el-card class='bord-card'>
             <div class='mainContent'>
                 <div class='nav'>
                     <el-button type='primary' v-on:click='select("all")'>全部</el-button>
                     <template v-for='(tag,index) in tags'>
-                                                                                                                                                                                        <el-button　:type='computedColor(index)' @click='select(tag)'>{{tag}}</el-button>
+                                                                                                                                                                                                    <el-button　:type='computedColor(index)' @click='select(tag)'>{{tag}}</el-button>
 </template>
                 </div>
                 <router-link :to='{name: "NewBlogRoute",params:{id:"0"}}'>
@@ -19,7 +19,7 @@
             <div class='blogDown'>
                 <div>
                     <template v-for='tag in blog.tags'>
-                                                                                                                                                                                                            <el-tag>{{tag}}</el-tag>
+                                                                                                                                                                                                                        <el-tag>{{tag}}</el-tag>
 </template>
                                     </div>
                                     <span class='blogTime'>{{blog.created_at}}</span>
@@ -60,6 +60,7 @@
                 deleteUrl: `${config.root}:3000/api/deleteblog`,
                 authUrl: `${config.root}:3000/api/authkey`,
                 loading: true,
+                theCookie: document.cookie.match(/key=(.{32})/)[1],
             };
         },
         methods: {
@@ -84,6 +85,7 @@
                     });
                     this.$post(this.deleteUrl, {
                         id: blogId,
+                        key: this.theCookie,
                     }).then(() => {
                         // 顺便一提，服务器端删除博客成功之后，主动删除this.blogs里的相关数据．这样正好会触发vue视图更新．双向绑定特性用着挺爽的．
                         // 注： 在标签选中状态下删除博客，和未选中状态下删除博客需要两种方式去处理上方标签和this.blogs/this.constBlogs的更新．
@@ -155,6 +157,14 @@
                     this.blogs = blogs;
                 }
             },
+            btHome(e) {
+                // Back to HomePage
+                if (e.target.className === 'container') {
+                    this.$router.push({
+                        name: 'HomeRoute',
+                    });
+                }
+            },
         },
         mounted() {
             // get the blogs data from remote server.
@@ -171,9 +181,8 @@
         },
         beforeRouteLeave(to, from, next) {
             if (to.name === 'NewBlogRoute') {
-                const theCookie = document.cookie.match(/key=(.{32})/)[1];
                 this.$post(this.authUrl, {
-                    key: theCookie,
+                    key: this.theCookie,
                 }).then((res) => {
                     if (res.status === 'ok') {
                         next();
