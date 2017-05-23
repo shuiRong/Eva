@@ -37,7 +37,7 @@ cd FrontEnd && npm run dev
 
 **有两个配置文件你要注意**
 
-> Eva/BackEnd/config.json　(保存后台登录的密码)
+> Eva/BackEnd/config.json　(保存后台登录的密码和对密码加密所用的密钥)
 >
 > Eva/FrontEnd/src/config.json  　(后端接口地址，默认: 127.0.0.1)
 
