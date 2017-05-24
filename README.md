@@ -1,28 +1,29 @@
 # Eva
+
 ![Eva](/screenshots/eva.jpg)
 
-> Just like the name, Eva is a **Pure**, **Consice**, **Beautiful** blog, I believe that every person who insists on writing a blog has a goddess in your heart.
+> 就像她的名字，Eva是一个**简洁**,**美观**的博客，我相信所有坚持写用她写博客的人心中都有一个属于自己的女神．
 
-`Eva` uses a lightweight javascript framework [Vue.js](https://vuejs.org/) and web framework [Express.js](https://expressjs.com/) for development, the UI refer [Material Design](https://github.com/1sters/material_design_zh) standard. If you think this project is good, please support it with a star.
+`Eva`使用了轻量级的JavaScript框架[Vue.js](https://vuejs.org/)和Web框架[Express.js](https://expressjs.com/)来开发，界面设计参考了[Material Design](https://github.com/1sters/material_design_zh)规范．如果你觉得这个项目不错，请为她点赞支持．
 
-Demo website : comming soon. . . (lack of a server)
+[快速开始](quickstart_zh.md) | [参与贡献](contribution.md) | [英文](README_EN.md) 
 
-[QuickStart](quickstart.md) | [Contribution](contribution.md) | [中文](README_ZH.md) 
+[演示站点](http://linshuirong.cn)
 
-### Feature
+### 特性
 
----
+------
 
-* Prue, consice, beatiful design
-* Markdown article written and published
-* Upload picture, transform to markdown syntax automatically
-* Netease Music hotlinking（iframe）
-* Deployment is simple
-* More sweet details
+- 设计简洁，界面美观
+- 支持Markdown 文章的预览和发布
+- 支持上传图片，并自动转换成Markdown语法
+- 支持网易云外链
+- 部署简单
+- 设计了很多类似：博客页点击背景图跳转到首页，后台页点击两边空白处跳转到主页，这样贴心的细节
 
-### Preview
+### 界面预览
 
----
+------
 
 ![1](/screenshots/1.png)
 
@@ -46,19 +47,19 @@ Demo website : comming soon. . . (lack of a server)
 
 
 
-### OpenSource Agreement
+### 开源协议
 
----
+------
 
 [MIT](LICENSE)
 
-### Thanks
+### 感谢
 
 ---
 
-- [Element](https://github.com/ElemeFE/element)
-- [Express](https://github.com/expressjs/express)
-- [Vue](https://github.com/vuejs/vue)
-- [Vue-markdown](https://github.com/miaolz123/vue-markdown)
-- [Vue-resource](https://github.com/pagekit/vue-resource)
-- [Vue-router](https://github.com/vuejs/vue-router)
++ [Element](https://github.com/ElemeFE/element)
++ [Express](https://github.com/expressjs/express)
++ [Vue](https://github.com/vuejs/vue)
++ [Vue-markdown](https://github.com/miaolz123/vue-markdown)
++ [Vue-resource](https://github.com/pagekit/vue-resource)
++ [Vue-router](https://github.com/vuejs/vue-router)
