@@ -8,7 +8,7 @@
 
 [快速开始](quickstart_zh.md) | [参与贡献](contribution.md) | [英文](README_EN.md) 
 
-[演示站点](http://linshuirong.cn)
+**PS :** 为了解决首屏`渲染`和`SEO`的问题,我想到结合`传统的MVC`和`前后端分离`,对Eva进行了改造,让后端渲染博客首页,这样浏览器拿到的就是最终的`HTML`.(项目代码在`Eva_SSR`文建夹里)
 
 ### 特性
 

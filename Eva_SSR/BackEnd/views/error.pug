@@ -1,0 +1,7 @@
+extends layout
+
+block content
+  h1= message
+  h2= error.status
+  strong 测试
+  pre #{error.stack}

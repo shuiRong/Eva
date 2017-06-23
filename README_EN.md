@@ -9,6 +9,8 @@ Demo website : comming soon. . . (lack of a server)
 
 [QuickStart](quickstart.md) | [Contribution](contribution.md) | [中文](README.md) 
 
+**PS :** I reconstructed my code (most of backend code, less of frontend code), to solve the problem of first-screen-renderer and SEO. The project code is in `Eva_SSR`file.
+
 ### Feature
 
 ---

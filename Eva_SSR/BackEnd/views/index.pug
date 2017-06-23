@@ -1,0 +1,27 @@
+extends layout.pug
+block content
+    div.container
+        div.bg
+        div.mainSec
+            each item in data
+                div.list
+                    a(href='dist/#/blog/'+item._id) #{item.title}
+                    div.tags
+                        each tag in item.tags
+                            span.tag #{tag}
+    div.more
+        span.dot
+        span.dot
+        span.dot
+
+    div.cover
+    div.dialog
+        span.cancel X
+        p 林水溶
+        div.motto 当断不断,反受其乱
+        div.link
+            a(href='https://github.com/shuiRong' target='_blanket') Github 
+            a(href='https://segmentfault.com/u/linshuirong_5856ac8451a56' target='_blanket') SegmentFault 
+            a(href='https://www.zhihu.com/people/linShuiRong' target='_blanket') 知乎
+
+    script(src='javascripts/home.js')
