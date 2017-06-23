@@ -19,9 +19,7 @@ router.get('/', function(req, res, next) {
                     }
                     arr.push(obj);
                 }
-                // res.render('index', arr);
-                // res.json(arr);
-                resolve(arr)
+                resolve(arr.reverse());
             }
         });
     });
