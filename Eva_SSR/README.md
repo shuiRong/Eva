@@ -1,5 +1,7 @@
 # Eva-SSR
 
+[中文](README_ZH.md)
+
 ### How to use ?
 
 **Firstly**, You need to modify`config.json`in `BackEnd`,`FrontEnd`files.

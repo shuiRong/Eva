@@ -1,5 +1,7 @@
 # Eva-SSR
 
+[EN](README.md)
+
 ### 怎么使用 ?
 
 **首先**,你需要修改`BackEnd`,`FrontEnd`项目里的`config.json`文件里的配置.
