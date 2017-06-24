@@ -1,9 +1,6 @@
 # Eva-SSR
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 6afd60ed3231348465fdd582eff431068af69abd
 [中文](README_ZH.md)
 
 ### How to use ?
