@@ -1,10 +1,10 @@
 # Eva-SSR
 
-### 怎么使用?
+### 怎么使用 ?
 
-首先,你需要修改`BackEnd`,`FrontEnd`项目里的`config.json`文件里的配置.
+**首先**,你需要修改`BackEnd`,`FrontEnd`项目里的`config.json`文件里的配置.
 
-然后:
+**然后:**
 
 ```shell
 cd FrontEnd
@@ -14,7 +14,7 @@ npm run build
 
 把生成的dist文件复制到`BackEnd`文件夹里的`public`文件夹下
 
-然后:
+**然后:**
 
 ```shell
 cd ../BackEnd

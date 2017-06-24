@@ -19,13 +19,13 @@ router.get('/', function(req, res, next) {
                     }
                     arr.push(obj);
                 }
-                resolve(arr.reverse());
+                resolve(arr)
             }
         });
     });
     getBlog.then((data) => {
         res.render('index', {
-            data: data
+            data: data.reverse()
         });
     }).catch((err) => {
         console.log('Error: get blog info failed. getblog.js', err);
