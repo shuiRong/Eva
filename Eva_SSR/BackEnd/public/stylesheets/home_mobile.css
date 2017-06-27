@@ -1,0 +1,69 @@
+/*手机端CSS*/
+
+@media (max-width: 768px) {
+    /*隐藏掉PC端才需要的标签*/
+    .dialog,
+    .bg,
+    .cover,
+    .more {
+        display: none;
+    }
+    .phone-header {
+        width: 100%;
+        height: 2.5rem;
+        background: #F9FAFC;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .phone-header-icon {
+        width: 1rem;
+        height: 1rem;
+        position: absolute;
+        left: 2rem;
+        opacity: 0.5;
+    }
+    .phone-header-motto {
+        color: #8492A6;
+    }
+    .mainSec {
+        /*background: #F9FAFC;*/
+        padding: 1rem;
+    }
+    .list {
+        margin-bottom: 0.5rem;
+        border-bottom: 1px solid #EFF2F7;
+        padding-bottom: 1rem;
+    }
+    a {
+        display: inline-block;
+        text-decoration: none;
+        color: #324057;
+        margin-bottom: 0.5rem;
+        font-size: 25px;
+    }
+    .tag {
+        margin-right: 0.5rem;
+        font-size: 17px;
+        color: #475669;
+        background: #EFF2F7;
+        padding: 0.15rem 0.3rem;
+        border-radius: 5px;
+    }
+    .phone-dialog {
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        background: white;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+    }
+    .phone-dialog a {
+        color: #8492A6;
+        font-weight: bold;
+    }
+}

@@ -2,11 +2,6 @@
     --main-font-size: 20px;
 }
 
-body {
-    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-    font-size: var(--main-font-size);
-}
-
 span,
 div,
 p,
@@ -19,125 +14,123 @@ body {
     margin: 0;
 }
 
-.bg {
-    background: url('/images/girl-min.jpg');
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    height: 600px;
-    opacity: 0.8;
-    z-index: -10;
+body {
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    font-size: var(--main-font-size);
 }
 
-a {
-    color: #1F2D3D;
-    text-decoration: none;
-}
-
-.container {
-    margin-left: 10%;
-    margin-top: 2rem;
-}
-
-.mainSec {
-    width: 50%;
-    min-height: 20rem;
-}
-
-.list {
-    background: white;
-    opacity: 0.7;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    min-height: 2rem;
-}
-
-.list a {
-    font-size: 25px;
-}
-
-.list .tag {
-    display: inline-block;
-    font-size: 15px;
-    background: #e4e8f1;
-    color: #48576a;
-    margin: 0.5rem 0.5rem 0 0;
-    padding: 0.1rem 0.3rem;
-    border-radius: 5px;
-}
-
-.more {
-    position: absolute;
-    background: transparent;
-    top: 2rem;
-    right: 5rem;
-    z-index: 10;
-    width: 3rem;
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-}
-
-.more span {
-    display: inline-block;
-    width: 0.7rem;
-    height: 0.7rem;
-    border-radius: 50%;
-    background: white;
-    margin: 0 2px;
-}
-
-.cover {
-    background: black;
-    opacity: 0.3;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 999px;
-    z-index: 100;
-    display: none;
-}
-
-.dialog {
-    background: white;
-    width: 30%;
-    padding: 1rem;
-    height: 6rem;
-    position: absolute;
-    top: 10rem;
-    margin-left: 35%;
-    z-index: 200;
-    display: none;
-}
-
-.dialog .cancel {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    color: #475669;
-}
-
-.dialog p {
-    color: #8492A6;
-}
-
-.dialog .link {
-    margin-top: 1rem;
-    font-size: 25px;
-    color: #475669;
-}
-
-.dialog .motto {
-    width: fit-content;
-    color: #99A9BF;
-    letter-spacing: 2px;
-    position: absolute;
-    bottom: 1rem;
-    right: 2rem;
+@media (min-width: 769px) {
+    /*隐藏移动端才需要的div*/
+    .phone-header,
+    .phone-dialog {
+        display: none;
+    }
+    .bg {
+        background: url('/images/girl-min.jpg');
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        height: 600px;
+        opacity: 0.8;
+        z-index: -10;
+    }
+    a {
+        color: #1F2D3D;
+        text-decoration: none;
+    }
+    .container {
+        margin-left: 10%;
+        margin-top: 2rem;
+    }
+    .mainSec {
+        width: 50%;
+        min-height: 20rem;
+    }
+    .list {
+        background: white;
+        opacity: 0.7;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        min-height: 2rem;
+    }
+    .list a {
+        font-size: 25px;
+    }
+    .list .tag {
+        display: inline-block;
+        font-size: 15px;
+        background: #e4e8f1;
+        color: #48576a;
+        margin: 0.5rem 0.5rem 0 0;
+        padding: 0.1rem 0.3rem;
+        border-radius: 5px;
+    }
+    .more {
+        position: absolute;
+        background: transparent;
+        top: 2rem;
+        right: 5rem;
+        z-index: 10;
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+    }
+    .more span {
+        display: inline-block;
+        width: 0.7rem;
+        height: 0.7rem;
+        border-radius: 50%;
+        background: white;
+        margin: 0 2px;
+    }
+    .cover {
+        background: black;
+        opacity: 0.3;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        z-index: 100;
+        display: none;
+    }
+    .dialog {
+        background: white;
+        width: 30%;
+        padding: 1rem;
+        height: 6rem;
+        position: absolute;
+        top: 10rem;
+        margin-left: 35%;
+        z-index: 200;
+        display: none;
+    }
+    .dialog .cancel {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        color: #475669;
+    }
+    .dialog p {
+        color: #8492A6;
+    }
+    .dialog .link {
+        margin-top: 1rem;
+        font-size: 25px;
+        color: #475669;
+    }
+    .dialog .motto {
+        width: fit-content;
+        color: #99A9BF;
+        letter-spacing: 2px;
+        position: absolute;
+        bottom: 1rem;
+        right: 2rem;
+    }
 }

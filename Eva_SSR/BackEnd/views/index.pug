@@ -1,6 +1,9 @@
 extends layout.pug
 block content
     div.container
+        div.phone-header
+            image.phone-header-icon(src='/images/link.png')
+            span.phone-header-motto 当断不断 反受其乱
         div.bg
         div.mainSec
             each item in data
@@ -23,5 +26,10 @@ block content
             a(href='https://github.com/shuiRong' target='_blanket') Github 
             a(href='https://segmentfault.com/u/linshuirong_5856ac8451a56' target='_blanket') SegmentFault 
             a(href='https://www.zhihu.com/people/linShuiRong' target='_blanket') 知乎
+    div.phone-dialog
+        a(href='https://github.com/shuiRong' target='_blanket') Github 
+        a(href='https://segmentfault.com/u/linshuirong_5856ac8451a56' target='_blanket') SegmentFault 
+        a(href='https://www.zhihu.com/people/linShuiRong' target='_blanket') 知乎
 
+        
     script(src='javascripts/home.js')
