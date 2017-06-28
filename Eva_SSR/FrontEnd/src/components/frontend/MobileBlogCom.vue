@@ -1,6 +1,6 @@
 <template>
     <div class='blogPage' v-loading.fullscreen.lock='loading'>
-        <div id='bgImage2' :style='clientHeight' @click='backToHome'>
+        <div id='bgImage2' :style='clientHeight'>
         </div>
         <div class='bpCardTitle'>{{blog.title}}</div>
         <div class='bpTags'>
@@ -39,25 +39,11 @@ export default {
         };
     },
     methods: {
-        // 点击背景图就回到主页，贴心吧，嘻嘻．
-        // Back to home page When you click the background image. sweet details.
-        backToHome() {
-            location.href = this.homeUrl;
-        },
     },
     components: {
         VueMarkdown,
     },
     created() {
-        // 在Vue实例created时期从服务器获取博客数据．
-        // Get the blog data from remote server in the created period.
-        // this.$http.post(this.getUrl, {
-        //     id: this.$route.params.id,
-        // }).then((res) => {
-        //     this.blog = res.data;
-        // }).catch((err) => {
-        //     console.error('Error: Get the blog infomation failed! ', err);
-        // });
         this.$post(this.getUrl, {
             id: this.$route.params.id,
             req: '', // 返回博客所有数据,

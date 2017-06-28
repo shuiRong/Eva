@@ -18,7 +18,11 @@ const routes = [{
     path: '/auth',
     name: 'AuthRoute',
     component: AuthCom,
-}]
+}, {
+    path: '/login',
+    name: 'LoginRoute',
+    component: LoginCom,
+}, ]
 
 // dev环境时需要加上home路由（方便debug），prod环境不需要．
 if (process.env.NODE_ENV == 'development') {
