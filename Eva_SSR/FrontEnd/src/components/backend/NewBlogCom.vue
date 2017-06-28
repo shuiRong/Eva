@@ -322,4 +322,13 @@ export default {
     width: 99%;
     height: 99%;
 }
+
+
+/* 覆盖Markdown样式*/
+
+blockquote {
+    border-left: 0.5rem solid black;
+    margin-left: 1rem;
+    padding-left: 1rem;
+}
 </style>

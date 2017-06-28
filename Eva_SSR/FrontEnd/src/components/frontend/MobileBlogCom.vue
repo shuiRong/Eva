@@ -2,19 +2,19 @@
     <div class='blogPage' v-loading.fullscreen.lock='loading'>
         <div id='bgImage2' :style='clientHeight' @click='backToHome'>
         </div>
-        <el-card class='bpCardTitle'>{{blog.title}}</el-card>
+        <div class='bpCardTitle'>{{blog.title}}</div>
         <div class='bpTags'>
             <template v-for='tag in blog.tags'>
-                <el-tag type='gray'>
+                <span>
                     {{tag}}
-                </el-tag>
+                </span>
             </template>
         </div>
         <p class='bpTime'>{{blog.created_at}}</p>
-        <el-card class='bpCardContent'>
+        <div class='bpCardContent'>
             <vue-markdown :source='blog.content'>
             </vue-markdown>
-        </el-card>
+        </div>
     </div>
 </template>
 
@@ -112,56 +112,52 @@ export default {
 @import url('../../assets/css/markdown-github.css');
 .blogPage {
     word-break: break-all;
+    padding: 1rem;
 }
 
 #bgImage2 {
-    background-image: url('../../assets/image/girl-min.jpg');
     width: 100%;
     background-size: 100% 100%;
     background-repeat: no-repeat;
     position: fixed;
     top: 0;
     left: 0;
-    opacity: 0.99;
 }
 
 .bpCardTitle {
     font-size: 30px;
     color: #1F2D3D;
-    width: 40%;
+    width: 100%;
     margin: auto;
     text-align: center;
-    opacity: 0.75;
+    background: #F9FAFC;
 }
 
 .bpTags {
     margin: 1rem auto;
-    width: 30%;
     text-align: center;
-    opacity: 0.8;
 }
 
-.el-tag {
+.bpTags span {
     margin: auto 0.3rem;
+    background: #99A9BF;
+    padding: 0.2rem 0.3rem;
+    border-radius: 5px;
 }
 
 .bpTime {
-    color: #EFF2F7;
+    color: #8492A6;
     font-size: 17px;
     text-align: center;
-    opacity: 0.7;
 }
 
 .bpCardContent {
     box-sizing: border-box;
-    padding: 1rem;
-    margin: 2rem auto;
-    width: 75%;
+    width: 100%;
     min-height: 20rem;
     color: #1F2D3D;
-    font-size: 25px;
+    font-size: 20px;
     line-height: 1.6;
-    opacity: 0.75;
 }
 
 .bpCardContent pre {
@@ -188,12 +184,12 @@ export default {
     margin: 0.5rem 0;
 }
 
-
 /* 覆盖Markdown样式*/
 
-blockquote {
+blockquote{
     border-left: 0.5rem solid black;
     margin-left: 1rem;
     padding-left: 1rem;
 }
+
 </style>

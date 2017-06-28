@@ -1,18 +1,16 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import LoginCom from '@/components/backend/LoginCom';
-// import AuthCom from '@/components/backend/AuthCom';
+
 // 路由懒加载
 const BlogCom = resolve => require(['@/components/frontend/BlogCom'], resolve);
 const NewBlogCom = resolve => require(['@/components/backend/NewBlogCom'], resolve);
 const AuthCom = resolve => require(['@/components/backend/AuthCom'], resolve);
 let HomeCom = ''
+const MobileBlogCom = resolve => require(['@/components/frontend/MobileBlogCom'], resolve);
+
 
 const routes = [{
-    path: '/blog/:id',
-    name: 'BlogRoute',
-    component: BlogCom,
-}, {
     path: '/new/:id',
     name: 'NewBlogRoute',
     component: NewBlogCom,
@@ -29,6 +27,21 @@ if (process.env.NODE_ENV == 'development') {
         path: '/',
         name: 'HomeRoute',
         component: HomeCom,
+    })
+}
+
+//　如果终端是手机的话，路由到博客对应手机组件.否则路由到正常PC端组件
+if (device.mobile()) {
+    routes.unshift({
+        path: '/blog/:id',
+        name: 'MobileBlogRoute',
+        component: MobileBlogCom,
+    })
+} else {
+    routes.unshift({
+        path: '/blog/:id',
+        name: 'BlogRoute',
+        component: BlogCom,
     })
 }
 
