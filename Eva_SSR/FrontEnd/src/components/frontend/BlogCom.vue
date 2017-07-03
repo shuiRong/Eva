@@ -1,20 +1,24 @@
 <template>
-    <div class='blogPage' v-loading.fullscreen.lock='loading'>
-        <div id='bgImage2' :style='clientHeight' @click='backToHome'>
+    <div class='blogPage'>
+        <div class="yinyang">
         </div>
-        <el-card class='bpCardTitle'>{{blog.title}}</el-card>
-        <div class='bpTags'>
-            <template v-for='tag in blog.tags'>
-                <el-tag type='gray'>
-                    {{tag}}
-                </el-tag>
-            </template>
+        <div class='content'>
+            <div id='bgImage2' :style='clientHeight' @click='backToHome'>
+            </div>
+            <el-card class='bpCardTitle'>{{blog.title}}</el-card>
+            <div class='bpTags'>
+                <template v-for='tag in blog.tags'>
+                    <el-tag type='gray'>
+                        {{tag}}
+                    </el-tag>
+                </template>
+            </div>
+            <p class='bpTime'>{{blog.created_at}}</p>
+            <el-card class='bpCardContent'>
+                <vue-markdown :source='blog.content'>
+                </vue-markdown>
+            </el-card>
         </div>
-        <p class='bpTime'>{{blog.created_at}}</p>
-        <el-card class='bpCardContent'>
-            <vue-markdown :source='blog.content'>
-            </vue-markdown>
-        </el-card>
     </div>
 </template>
 
@@ -34,7 +38,6 @@ export default {
             },
             getUrl: `${config.root}:80/api/getblog`,
             authUrl: `${config.root}:80/api/authkey`,
-            loading: true,
             homeUrl: `${config.root}`,
         };
     },
@@ -63,7 +66,8 @@ export default {
             req: '', // 返回博客所有数据,
         }).then((res) => {
             this.blog = res;
-            this.loading = false;
+            document.getElementsByClassName('yinyang')[0].style.display = 'none'
+            document.getElementsByClassName('content')[0].style.display = 'block'
         }).catch((err) => {
             console.error('Error: Get the blog infomation failed! ', err);
         });
@@ -112,6 +116,10 @@ export default {
 @import url('../../assets/css/markdown-github.css');
 .blogPage {
     word-break: break-all;
+}
+
+.content {
+    display: none;
 }
 
 #bgImage2 {
@@ -189,11 +197,77 @@ export default {
 }
 
 
+
 /* 覆盖Markdown样式*/
 
 blockquote {
     border-left: 0.5rem solid black;
     margin-left: 1rem;
     padding-left: 1rem;
+}
+
+
+
+/* loading 动画*/
+
+body {
+    background-color: #E5E9F2;
+}
+
+.yinyang {
+    position: absolute;
+    left: 45%;
+    left: calc(50% - 100px);
+    top: 30%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(to bottom, black 0%, black 50%, white 50%, white 100%);
+    box-shadow: 6px 6px 27px 4px rgba(0, 0, 0, 0.16);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: 2s rotate linear infinite;
+}
+
+.yinyang:after,
+.yinyang:before {
+    content: '';
+    display: block;
+    border-radius: 50%;
+}
+
+.yinyang:after {
+    width: 75%;
+    height: 75%;
+    background: radial-gradient(ellipse at center, black 0%, black 25%, white 25%, white 100%);
+    animation: inner-size 3s ease-in-out infinite;
+    animation-delay: -1.5s;
+}
+
+.yinyang:before {
+    width: 25%;
+    height: 25%;
+    background: radial-gradient(ellipse at center, white 0%, white 25%, black 25%, black 100%);
+    animation: inner-size 3s ease-in-out infinite;
+}
+
+@keyframes inner-size {
+    0%,
+    100% {
+        width: 75%;
+        height: 75%;
+    }
+
+    50% {
+        width: 25%;
+        height: 25%;
+    }
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(-360deg)
+    }
 }
 </style>
